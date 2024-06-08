@@ -98,7 +98,9 @@ export default function App() {
             </div>
 
             <p>
-                <span id="datetime" ref={datetimeRef} />
+                <span id="datetime" ref={datetimeRef}>
+                    {new Date().toLocaleString()}
+                </span>
             </p>
 
             <div id="myUnOrdList">
