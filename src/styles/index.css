@@ -1,15 +1,21 @@
+/* Google Font (Quick Sand) */
+@import url(https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap);
+
+/* Font awesome (https://fontawesome.com) for basic icons */
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css);
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
+#root {
     /* #363532, rgb(88, 111, 112) */
     align-items: center;
     display: flex;
     flex-direction: column;
-    font-family: 'Work Sans', sans-serif;
+    font-family: "Work Sans", sans-serif;
     min-height: 100vh;
     padding-top: 3%;
 }
@@ -34,7 +40,9 @@ body {
     transition: 0.3s linear;
 }
 
-#header, #form, #datetime {
+#header,
+#form,
+#datetime {
     margin: 0 1rem;
     min-height: 10vh;
     width: 100%;
@@ -68,7 +76,7 @@ body {
     width: 35px;
 }
 
-.theme-selector:hover { 
+.theme-selector:hover {
     box-shadow: white 0 0 8px;
     cursor: pointer;
 }
@@ -93,41 +101,54 @@ body {
 #title {
     border-right: solid 3px rgba(0, 0, 0, 0.75);
     white-space: pre;
-    overflow: hidden;     
-    letter-spacing: 0.20rem;
+    overflow: hidden;
+    letter-spacing: 0.2rem;
     margin-top: 50px;
     margin-bottom: 20px;
     max-width: 480px;
-  }
-  
-  /* Animation */
+}
+
+/* Animation */
 #title {
-    animation: animated-text 2s steps(11,end) 0.5s 1 normal both,
-        animated-cursor 750ms steps(11,end) infinite;
-  }
+    animation: animated-text 2s steps(11, end) 0.5s 1 normal both,
+        animated-cursor 750ms steps(11, end) infinite;
+}
 
 #title.darker-title {
-    animation: animated-text 2s steps(11,end) 0.5s 1 normal both, darker-animated-cursor 750ms steps(11,end) infinite;
+    animation: animated-text 2s steps(11, end) 0.5s 1 normal both,
+        darker-animated-cursor 750ms steps(11, end) infinite;
 }
-  
-  /* text animation */
-  
-  @keyframes animated-text{
-    from{width: 0%;}
-    to{width: 480px;}
-  }
-  
-  /* cursor animations */
-  
-  @keyframes animated-cursor{
-    from{border-right-color: rgba(0, 0, 0, 0.75);}
-    to{border-right-color: transparent;}
-  }
 
-  @keyframes darker-animated-cursor {
-    from{border-right-color: #01394c;}
-    to{border-right-color: transparent;}
-  }
+/* text animation */
+
+@keyframes animated-text {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 480px;
+    }
+}
+
+/* cursor animations */
+
+@keyframes animated-cursor {
+    from {
+        border-right-color: rgba(0, 0, 0, 0.75);
+    }
+    to {
+        border-right-color: transparent;
+    }
+}
+
+@keyframes darker-animated-cursor {
+    from {
+        border-right-color: #01394c;
+    }
+    to {
+        border-right-color: transparent;
+    }
+}
 
 form {
     display: flex;
@@ -157,9 +178,8 @@ form input.standard-input {
     color: rgb(247, 226, 223);
 }
 
-
 form input.light-input {
-    background-color: #AEB1B4;
+    background-color: #aeb1b4;
     color: #1a150e;
 }
 
@@ -196,7 +216,7 @@ form input.darker-input:hover {
 
 button {
     border: none;
-    outline: none; 
+    outline: none;
     transition: box-shadow 200ms ease, background-color 200ms ease-in-out;
 }
 
@@ -274,14 +294,14 @@ form button {
 }
 
 .light-todo {
-    background-color:#AEB1B4;
+    background-color: #aeb1b4;
 }
 
 .darker-todo {
     background-color: #01394c;
 }
 
-.todo li{
+.todo li {
     padding: 7px;
     /* word-wrap: break-word; */
     /* flex-wrap: wrap; */
@@ -293,7 +313,8 @@ form button {
     overflow-wrap: anywhere;
 }
 
-.check-btn, .delete-btn {
+.check-btn,
+.delete-btn {
     font-size: 19px;
     cursor: pointer;
     width: 2em;
@@ -306,10 +327,10 @@ form button {
     padding: 0rem 0.5rem;
 }
 
-.fa-trash, .fa-check { 
+.fa-trash,
+.fa-check {
     pointer-events: none;
 }
-
 
 .completed {
     transition: 0.2s;
@@ -337,9 +358,8 @@ form button {
     }
 
     #title {
-        animation: 
-            animated-text 3s steps(16,end) 0.5s 1 normal both,
-            animated-cursor 750ms steps(16,end) infinite;
+        animation: animated-text 3s steps(16, end) 0.5s 1 normal both,
+            animated-cursor 750ms steps(16, end) infinite;
         margin-bottom: 10px;
         margin-top: 30px;
         max-width: 330px;
@@ -352,9 +372,8 @@ form button {
     }
 
     #title {
-        animation: 
-            animated-text 3.5s steps(16,end) 0.5s 1 normal both,
-            animated-cursor 750ms steps(16,end) infinite;
+        animation: animated-text 3.5s steps(16, end) 0.5s 1 normal both,
+            animated-cursor 750ms steps(16, end) infinite;
         max-width: 255px;
     }
 }
