@@ -1,6 +1,6 @@
-# SECV2223 Web Programming Final Project
+# About
 
-This project is built for the SECV2223 Web Programming course as a part of its assessment.
+Small to-do list application using React and TypeScript.
 
 ## Building
 
