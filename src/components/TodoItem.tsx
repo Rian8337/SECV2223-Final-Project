@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useContext } from "react";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { TodoContext } from "../hooks/TodoContext";
+import { Todo } from "../types/Todo";
 
-export default function TodoItem(props: { todo: string }) {
+export default function TodoItem(props: { todo: Todo }) {
     const { todo } = props;
 
     const divRef = useRef<HTMLDivElement>(null);
@@ -19,6 +20,8 @@ export default function TodoItem(props: { todo: string }) {
         }
 
         divRef.current.classList.toggle("completed");
+
+        todoCtx.toggleTodoCheck(todo);
     }
 
     function deleteTodo(event: React.MouseEvent<HTMLButtonElement>) {
@@ -38,12 +41,18 @@ export default function TodoItem(props: { todo: string }) {
     }
 
     return (
-        <div className={`todo ${themeCtx.theme}-todo`} ref={divRef}>
-            <li className="todo-item">{todo}</li>
+        <div
+            className={`todo ${themeCtx.theme}-todo ${
+                todo.checked ? "completed" : ""
+            }`}
+            ref={divRef}
+        >
+            <li className="todo-item">{todo.task}</li>
             <button
                 className={`check-btn ${themeCtx.theme}-button`}
                 type="button"
                 onClick={checkTodo}
+                defaultChecked={todo.checked}
             >
                 <FontAwesomeIcon icon={faCheck} />
             </button>

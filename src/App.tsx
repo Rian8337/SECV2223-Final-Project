@@ -17,15 +17,18 @@ export default function App() {
             return;
         }
 
-        const todo = todoInputRef.current.value;
+        const task = todoInputRef.current.value;
 
-        if (!todo) {
+        if (!task) {
             alert("You must write something!");
 
             return;
         }
 
-        todoCtx.addTodo(todo);
+        todoCtx.addTodo({
+            task: task,
+            checked: false,
+        });
 
         // Empty the input field.
         todoInputRef.current.value = "";
