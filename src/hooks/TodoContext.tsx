@@ -15,18 +15,24 @@ export const TodoContext = createContext({
 export function TodoContextProvider(props: PropsWithChildren) {
     const [todos, setTodos] = useState<string[]>(defaultValue);
 
-    const updateTodos = (todos: string[]) => {
-        setTodos(() => todos);
-
-        localStorage.setItem("todos", JSON.stringify(todos));
-    };
-
     const addTodo = (todo: string) => {
-        updateTodos(todos.concat(todo));
+        setTodos((prevTodos) => {
+            const newTodos = prevTodos.concat(todo);
+
+            localStorage.setItem("todos", JSON.stringify(newTodos));
+
+            return newTodos;
+        });
     };
 
     const removeTodo = (todo: string) => {
-        updateTodos(todos.filter((value) => value !== todo));
+        setTodos((prevTodos) => {
+            const newTodos = prevTodos.filter((value) => value !== todo);
+
+            localStorage.setItem("todos", JSON.stringify(newTodos));
+
+            return newTodos;
+        });
     };
 
     return (
