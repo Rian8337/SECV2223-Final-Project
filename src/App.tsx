@@ -106,7 +106,10 @@ export default function App() {
             <div id="myUnOrdList">
                 <ul className="todo-list">
                     {todoCtx.todos.map((todo, i) => (
-                        <TodoItem key={i} todo={todo} />
+                        <TodoItem
+                            key={`${i.toString()}-${Date.now().toString()}`}
+                            todo={todo}
+                        />
                     ))}
                 </ul>
             </div>
