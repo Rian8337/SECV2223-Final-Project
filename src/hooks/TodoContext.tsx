@@ -3,10 +3,10 @@ import { Todo } from "../types/Todo";
 
 const defaultValue = JSON.parse(
     localStorage.getItem("todos") ?? "[]"
-) as Todo[];
+) as readonly Todo[];
 
 export const TodoContext = createContext({
-    todos: defaultValue as readonly Todo[],
+    todos: defaultValue,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
     addTodo: (_: Todo) => {},
     // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
