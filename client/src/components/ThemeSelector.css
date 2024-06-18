@@ -1,0 +1,44 @@
+.flexrow-container {
+    align-items: center;
+    align-self: flex-end;
+    display: flex;
+    justify-content: space-around;
+    margin-right: 3%;
+}
+
+.theme-selector {
+    border: 1px solid #d1dae3;
+    border-radius: 100%;
+    height: 35px;
+    margin: 0 8px;
+    transition: tranform 150ms ease-in-out, box-shadow 200ms ease-in-out;
+    width: 35px;
+}
+
+.theme-selector:hover {
+    box-shadow: white 0 0 8px;
+    cursor: pointer;
+}
+
+.theme-selector:active {
+    transform: scale(0.95);
+}
+
+.standard-theme {
+    background-image: linear-gradient(100deg, #575656, #062e3f);
+}
+
+.light-theme {
+    background-image: linear-gradient(100deg, #d4f1ff, #ffffff);
+}
+
+.darker-theme {
+    background-image: linear-gradient(100deg, #001214, #001f29);
+}
+
+@media only screen and (max-width: 1000px) {
+    .flexrow-container {
+        align-self: unset;
+        margin-right: 0;
+    }
+}

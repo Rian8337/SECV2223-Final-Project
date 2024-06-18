@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import "./DateTime.css";
 
 export default function DateTime() {
     const datetimeRef = useRef<HTMLSpanElement>(null);

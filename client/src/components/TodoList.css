@@ -1,0 +1,13 @@
+#myUnOrdList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+}
+
+.todo-list {
+    min-width: 25%;
+
+    /* To remove the bullets of unordered list */
+    list-style: none;
+}

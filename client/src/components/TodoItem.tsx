@@ -4,6 +4,7 @@ import { useRef, useContext } from "react";
 import { ThemeContext } from "../hooks/ThemeContext";
 import { TodoContext } from "../hooks/TodoContext";
 import { Todo } from "../types/Todo";
+import "./TodoItem.css";
 
 export default function TodoItem(props: { todo: Todo }) {
     const { todo } = props;
@@ -32,7 +33,7 @@ export default function TodoItem(props: { todo: Todo }) {
         }
 
         // Enable delete animation.
-        divRef.current.classList.add("fall");
+        divRef.current.classList.add("todo-transition-fall");
 
         // Remove the todo from the list after the animation ends.
         divRef.current.addEventListener("transitionend", () => {
@@ -43,13 +44,13 @@ export default function TodoItem(props: { todo: Todo }) {
     return (
         <div
             className={`todo ${themeCtx.theme}-todo ${
-                todo.checked ? "completed" : ""
+                todo.checked ? "todo-completed" : ""
             }`}
             ref={divRef}
         >
             <li className="todo-item">{todo.task}</li>
             <button
-                className={`check-btn ${themeCtx.theme}-button`}
+                className={`todo-check-btn ${themeCtx.theme}-button`}
                 type="button"
                 onClick={checkTodo}
                 defaultChecked={todo.checked}
@@ -58,7 +59,7 @@ export default function TodoItem(props: { todo: Todo }) {
             </button>
 
             <button
-                className={`delete-btn ${themeCtx.theme}-button`}
+                className={`todo-delete-btn ${themeCtx.theme}-button`}
                 type="button"
                 onClick={deleteTodo}
             >

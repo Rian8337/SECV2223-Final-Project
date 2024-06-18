@@ -1,6 +1,7 @@
 import { useContext, useRef } from "react";
 import { TodoContext } from "../hooks/TodoContext";
 import { ThemeContext } from "../hooks/ThemeContext";
+import "./AddTask.css";
 
 export default function AddTask() {
     const todoCtx = useContext(TodoContext);
@@ -33,8 +34,8 @@ export default function AddTask() {
     }
 
     return (
-        <div id="form">
-            <form>
+        <div id="add-task-form">
+            <form className="add-task-form">
                 <input
                     className={`${themeCtx.theme}-input`}
                     type="text"

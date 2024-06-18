@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../hooks/ThemeContext";
+import "./ThemeSelector.css";
 
 export default function ThemeSelector() {
     const themeCtx = useContext(ThemeContext);
