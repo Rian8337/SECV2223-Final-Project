@@ -20,7 +20,7 @@ export default function TodoItem(props: { todo: Todo }) {
             return;
         }
 
-        divRef.current.classList.toggle("completed");
+        divRef.current.classList.toggle("todo-completed");
 
         todoCtx.toggleTodoCheck(todo);
     }

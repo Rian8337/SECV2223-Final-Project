@@ -41,9 +41,15 @@ export function TodoContextProvider(props: PropsWithChildren) {
     };
 
     const toggleTodoCheck = (todo: Todo) => {
-        todo.checked = !todo.checked;
+        setTodos((prevTodos) => {
+            const newTodos = prevTodos.map((v) =>
+                v.task === todo.task ? { ...v, checked: !v.checked } : v
+            );
 
-        localStorage.setItem("todos", JSON.stringify(todos));
+            localStorage.setItem("todos", JSON.stringify(newTodos));
+
+            return newTodos;
+        });
     };
 
     return (
