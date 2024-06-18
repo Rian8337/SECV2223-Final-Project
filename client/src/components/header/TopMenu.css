@@ -1,0 +1,7 @@
+.top-menu {
+    font-size: 0.5em;
+}
+
+.top-menu > * {
+    margin: 0 0.25em;
+}

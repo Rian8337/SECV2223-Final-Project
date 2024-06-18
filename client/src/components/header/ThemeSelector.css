@@ -1,22 +1,14 @@
-.flexrow-container {
-    align-items: center;
-    align-self: flex-end;
-    display: flex;
-    justify-content: space-around;
-    margin-right: 3%;
-}
-
 .theme-selector {
     border: 1px solid #d1dae3;
     border-radius: 100%;
-    height: 35px;
-    margin: 0 8px;
+    height: 0.75em;
+    margin: 0 0.15em;
     transition: tranform 150ms ease-in-out, box-shadow 200ms ease-in-out;
-    width: 35px;
+    width: 0.75em;
 }
 
 .theme-selector:hover {
-    box-shadow: white 0 0 8px;
+    box-shadow: white 0 0 0.15em;
     cursor: pointer;
 }
 
@@ -34,11 +26,4 @@
 
 .darker-theme {
     background-image: linear-gradient(100deg, #001214, #001f29);
-}
-
-@media only screen and (max-width: 1000px) {
-    .flexrow-container {
-        align-self: unset;
-        margin-right: 0;
-    }
 }

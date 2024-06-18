@@ -75,3 +75,9 @@ button.darker-button {
 button.darker-button:hover {
     background-color: #001f29;
 }
+
+/* Keep anchor links at current color */
+a {
+    color: inherit;
+    text-decoration: none;
+}

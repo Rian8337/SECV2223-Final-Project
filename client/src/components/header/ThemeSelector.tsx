@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { ThemeContext } from "../hooks/ThemeContext";
+import { ThemeContext } from "../../hooks/ThemeContext";
 import "./ThemeSelector.css";
 
 export default function ThemeSelector() {
     const themeCtx = useContext(ThemeContext);
 
     return (
-        <div className="flexrow-container">
+        <>
             <div
                 className="standard-theme theme-selector"
                 onClick={() => {
@@ -27,6 +27,6 @@ export default function ThemeSelector() {
                     themeCtx.setTheme("darker");
                 }}
             />
-        </div>
+        </>
     );
 }

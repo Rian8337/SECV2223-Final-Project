@@ -1,6 +1,13 @@
+.flexrow-container {
+    align-items: center;
+    align-self: flex-end;
+    display: flex;
+    justify-content: space-around;
+    margin-right: 3%;
+}
+
 #header {
     margin: 0 1rem;
-    min-height: 10vh;
     width: 100%;
     align-items: center;
     display: flex;
@@ -8,7 +15,6 @@
     justify-content: space-around;
     font-size: 3rem;
     min-height: 25vh;
-    width: 100%;
 }
 
 /* Animation */
@@ -65,6 +71,13 @@
 }
 
 /* Responsive design */
+
+@media only screen and (max-width: 1000px) {
+    .flexrow-container {
+        align-self: unset;
+        margin-right: 0;
+    }
+}
 
 @media only screen and (max-width: 800px) {
     #header {
