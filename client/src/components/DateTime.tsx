@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import "./DateTime.css";
 
 export default function DateTime() {
-    const datetimeRef = useRef<HTMLDivElement>(null);
+    const datetimeRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
         // Update the datetime every second.
@@ -20,8 +20,10 @@ export default function DateTime() {
     }, []);
 
     return (
-        <div id="datetime" className="text-center" ref={datetimeRef}>
-            {new Date().toLocaleString()}
-        </div>
+        <p>
+            <span id="datetime" ref={datetimeRef}>
+                {new Date().toLocaleString()}
+            </span>
+        </p>
     );
 }
