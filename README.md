@@ -9,6 +9,7 @@ To build the application, you need Node.js version 20 or later.
 Begin by installing dependencies:
 
 ```sh
+cd client
 npm i
 ```
 
