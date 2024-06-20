@@ -1,6 +1,6 @@
 import { useContext, useRef } from "react";
-import { TodoContext } from "../hooks/TodoContext";
-import { ThemeContext } from "../hooks/ThemeContext";
+import { TodoContext } from "../../hooks/TodoContext";
+import { ThemeContext } from "../../hooks/ThemeContext";
 import "./AddTask.css";
 
 export default function AddTask() {

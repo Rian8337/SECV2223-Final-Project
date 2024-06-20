@@ -1,7 +1,7 @@
 import PageWrapper from "../components/PageWrapper";
-import AddTask from "../components/AddTask";
-import DateTime from "../components/DateTime";
-import TodoList from "../components/TodoList";
+import AddTask from "../components/home/AddTask";
+import DateTime from "../components/home/DateTime";
+import TodoList from "../components/home/TodoList";
 
 export default function HomePage() {
     return (
