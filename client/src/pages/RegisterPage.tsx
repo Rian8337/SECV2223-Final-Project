@@ -1,9 +1,12 @@
 import PageWrapper from "../components/PageWrapper";
+import RegisterForm from "../components/register/RegisterForm";
 
 export default function RegisterPage() {
     return (
         <PageWrapper>
-            <p className="text-center">Test register!</p>
+            <h2>Register</h2>
+
+            <RegisterForm />
         </PageWrapper>
     );
 }

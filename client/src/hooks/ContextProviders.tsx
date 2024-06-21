@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { TodoContextProvider } from "./TodoContext";
 import { ThemeContextProvider } from "./ThemeContext";
+import { UserContextProvider } from "./UserContext";
 
 const compose =
     (...components: FC<Record<string, unknown>>[]) =>
@@ -10,4 +11,8 @@ const compose =
             props.children
         );
 
-export const Providers = compose(TodoContextProvider, ThemeContextProvider);
+export const Providers = compose(
+    TodoContextProvider,
+    ThemeContextProvider,
+    UserContextProvider
+);
