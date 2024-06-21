@@ -1,6 +1,12 @@
 import { AnimatePresence } from "framer-motion";
 import Header from "./components/header/Header";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import {
+    Navigate,
+    Route,
+    Routes,
+    useLocation,
+    useNavigate,
+} from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import FamilyPage from "./pages/FamilyPage";
@@ -13,6 +19,8 @@ export default function App() {
     const location = useLocation();
     const navigate = useNavigate();
     const userCtx = useContext(UserContext);
+
+    const isAuthenticated = !!userCtx.value;
 
     useEffect(() => {
         if (userCtx.value !== undefined) {
@@ -57,9 +65,38 @@ export default function App() {
 
             <AnimatePresence mode="wait">
                 <Routes>
-                    <Route path="/family" element={<FamilyPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
+                    <Route
+                        path="/family"
+                        element={
+                            isAuthenticated ? (
+                                <FamilyPage />
+                            ) : (
+                                <Navigate to={"/login"} />
+                            )
+                        }
+                    />
+
+                    <Route
+                        path="/login"
+                        element={
+                            isAuthenticated ? (
+                                <Navigate to={"/"} />
+                            ) : (
+                                <LoginPage />
+                            )
+                        }
+                    />
+
+                    <Route
+                        path="/register"
+                        element={
+                            isAuthenticated ? (
+                                <Navigate to={"/"} />
+                            ) : (
+                                <RegisterPage />
+                            )
+                        }
+                    />
 
                     <Route path="*" element={<HomePage />} />
                 </Routes>
