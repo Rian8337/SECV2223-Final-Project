@@ -1,9 +1,12 @@
 import PageWrapper from "../components/PageWrapper";
+import LoginForm from "../components/login/LoginForm";
 
 export default function LoginPage() {
     return (
         <PageWrapper>
-            <p className="text-center">Test!</p>
+            <h2>Login</h2>
+
+            <LoginForm />
         </PageWrapper>
     );
 }
