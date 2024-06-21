@@ -40,6 +40,7 @@ export default function LoginForm() {
                         headers: {
                             "Content-Type": "application/x-www-form-urlencoded",
                         },
+                        credentials: "include",
                         body: searchParams,
                     }
                 )

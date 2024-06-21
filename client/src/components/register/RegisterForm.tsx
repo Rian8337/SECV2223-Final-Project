@@ -46,6 +46,7 @@ export default function RegisterForm() {
                         headers: {
                             "Content-Type": "application/x-www-form-urlencoded",
                         },
+                        credentials: "include",
                         body: searchParams,
                     }
                 )

@@ -21,7 +21,7 @@ $user = null;
 if (isset($_COOKIE["sessionId"])) {
     $user = $db->query(
         sprintf(
-            "SELECT id, name, family_id, password FROM %s WHERE session_id = '%s'",
+            "SELECT * FROM %s WHERE session_id = '%s'",
             Db::user_table,
             $db->escapeString($_COOKIE['sessionId'])
         )
@@ -46,7 +46,7 @@ if (isset($_COOKIE["sessionId"])) {
 
     $user = $db->query(
         sprintf(
-            "SELECT id, name, family_id, password FROM %s WHERE email = '%s'",
+            "SELECT * FROM %s WHERE email = '%s'",
             Db::user_table,
             $db->escapeString($_POST['email'])
         )
@@ -55,20 +55,22 @@ if (isset($_COOKIE["sessionId"])) {
 
 if (!$user) {
     unset($_COOKIE["sessionId"]);
+    setcookie("sessionId", "", time() - 3600);
+
     http_response_code(401);
     exit();
 }
 
-// Validate password is available
+// Validate password if available
 if (isset($_POST["password"]) && $user['password'] !== $_POST['password']) {
     http_response_code(401);
     exit();
 }
 
-$sessionId = isset($_POST["password"]) ? bin2hex(random_bytes(64)) : $user['session_id'];
+$sessionId = isset($_POST["password"]) ? bin2hex(random_bytes(16)) : $user['session_id'];
 
 // Invalidate login after 1 day
-setcookie("sessionId", $sessionId, time() + 60 * 60 * 24, "", "", true, true);
+setcookie("sessionId", $sessionId, time() + 60 * 60 * 24);
 
 if (isset($_POST["password"])) {
     $db->query(
