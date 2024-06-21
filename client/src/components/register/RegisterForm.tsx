@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import "./RegisterForm.css";
 import { encodePassword } from "../../utils/TextEncoder";
@@ -9,17 +9,11 @@ export default function RegisterForm() {
     const userCtx = useContext(UserContext);
     const themeCtx = useContext(ThemeContext);
 
-    const [controller, setController] = useState(new AbortController());
+    const [isRegistering, setIsRegistering] = useState(false);
     const [error, setError] = useState<string | null>();
 
     const passwordRef = useRef<HTMLInputElement>(null);
     const confirmPasswordRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-        return () => {
-            controller.abort();
-        };
-    }, [controller]);
 
     function validatePassword() {
         setError(
@@ -31,6 +25,9 @@ export default function RegisterForm() {
 
     function register(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
+
+        setError(null);
+        setIsRegistering(true);
 
         const formData = new FormData(event.currentTarget);
 
@@ -56,7 +53,6 @@ export default function RegisterForm() {
                         },
                         credentials: "include",
                         body: searchParams,
-                        signal: controller.signal,
                     }
                 )
                     .then((response) => {
@@ -89,7 +85,7 @@ export default function RegisterForm() {
                         );
                     })
                     .finally(() => {
-                        setController(new AbortController());
+                        setIsRegistering(false);
                     });
             })
             .catch((e: unknown) => {
@@ -100,6 +96,9 @@ export default function RegisterForm() {
                         ? e.message
                         : "An error occurred. Please try again later."
                 );
+            })
+            .finally(() => {
+                setIsRegistering(false);
             });
     }
 
@@ -112,6 +111,7 @@ export default function RegisterForm() {
                 placeholder="Name"
                 required
                 autoComplete="name"
+                disabled={isRegistering}
             />
 
             <input
@@ -121,6 +121,7 @@ export default function RegisterForm() {
                 placeholder="Email"
                 required
                 autoComplete="email"
+                disabled={isRegistering}
             />
 
             <input
@@ -132,6 +133,7 @@ export default function RegisterForm() {
                 onChange={validatePassword}
                 ref={passwordRef}
                 autoComplete="new-password"
+                disabled={isRegistering}
             />
 
             <input
@@ -143,11 +145,14 @@ export default function RegisterForm() {
                 onChange={validatePassword}
                 ref={confirmPasswordRef}
                 autoComplete="new-password"
+                disabled={isRegistering}
             />
 
             {error !== null ? <p className="error">{error}</p> : null}
 
-            <button type="submit">Register</button>
+            <button type="submit" disabled={isRegistering}>
+                Register
+            </button>
         </form>
     );
 }

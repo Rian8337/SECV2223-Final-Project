@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
@@ -12,19 +12,14 @@ export default function LoginForm() {
     const userCtx = useContext(UserContext);
     const themeCtx = useContext(ThemeContext);
 
-    const [controller, setController] = useState(new AbortController());
+    const [isLoggingIn, setIsLoggingIn] = useState(false);
     const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        return () => {
-            controller.abort();
-        };
-    }, [controller]);
 
     function login(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
         setError(null);
+        setIsLoggingIn(true);
 
         const formData = new FormData(event.currentTarget);
 
@@ -49,7 +44,6 @@ export default function LoginForm() {
                         },
                         credentials: "include",
                         body: searchParams,
-                        signal: controller.signal,
                     }
                 )
                     .then((response) => {
@@ -82,7 +76,7 @@ export default function LoginForm() {
                         );
                     })
                     .finally(() => {
-                        setController(new AbortController());
+                        setIsLoggingIn(false);
                     });
             })
             .catch((e: unknown) => {
@@ -93,6 +87,9 @@ export default function LoginForm() {
                         ? e.message
                         : "An error occurred. Please try again later."
                 );
+            })
+            .finally(() => {
+                setIsLoggingIn(false);
             });
     }
 
@@ -105,6 +102,7 @@ export default function LoginForm() {
                 placeholder="Email"
                 required
                 autoComplete="email"
+                disabled={isLoggingIn}
             />
 
             <input
@@ -113,6 +111,7 @@ export default function LoginForm() {
                 className={`${themeCtx.theme}-input`}
                 placeholder="Password"
                 required
+                disabled={isLoggingIn}
             />
 
             {error !== null ? <p className="error">{error}</p> : null}
@@ -128,6 +127,7 @@ export default function LoginForm() {
                     onClick={() => {
                         navigate("/register");
                     }}
+                    disabled={isLoggingIn}
                 >
                     Register
                 </button>
