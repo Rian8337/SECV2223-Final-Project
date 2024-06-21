@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import "./RegisterForm.css";
 import { encodePassword } from "../../utils/TextEncoder";
@@ -8,10 +8,18 @@ import { UserContext } from "../../hooks/UserContext";
 export default function RegisterForm() {
     const userCtx = useContext(UserContext);
     const themeCtx = useContext(ThemeContext);
+
+    const [controller, setController] = useState(new AbortController());
     const [error, setError] = useState<string | null>();
 
     const passwordRef = useRef<HTMLInputElement>(null);
     const confirmPasswordRef = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        return () => {
+            controller.abort();
+        };
+    }, [controller]);
 
     function validatePassword() {
         setError(
@@ -48,6 +56,7 @@ export default function RegisterForm() {
                         },
                         credentials: "include",
                         body: searchParams,
+                        signal: controller.signal,
                     }
                 )
                     .then((response) => {
@@ -78,6 +87,9 @@ export default function RegisterForm() {
                                 ? e.message
                                 : "An error occurred. Please try again later."
                         );
+                    })
+                    .finally(() => {
+                        setController(new AbortController());
                     });
             })
             .catch((e: unknown) => {

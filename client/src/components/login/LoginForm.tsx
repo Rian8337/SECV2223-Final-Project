@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
@@ -12,7 +12,14 @@ export default function LoginForm() {
     const userCtx = useContext(UserContext);
     const themeCtx = useContext(ThemeContext);
 
+    const [controller, setController] = useState(new AbortController());
     const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        return () => {
+            controller.abort();
+        };
+    }, [controller]);
 
     function login(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -42,6 +49,7 @@ export default function LoginForm() {
                         },
                         credentials: "include",
                         body: searchParams,
+                        signal: controller.signal,
                     }
                 )
                     .then((response) => {
@@ -72,6 +80,9 @@ export default function LoginForm() {
                                 ? e.message
                                 : "An error occurred. Please try again later."
                         );
+                    })
+                    .finally(() => {
+                        setController(new AbortController());
                     });
             })
             .catch((e: unknown) => {

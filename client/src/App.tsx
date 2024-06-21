@@ -28,11 +28,14 @@ export default function App() {
         }
 
         // Try to login user in case the session is still valid.
+        const controller = new AbortController();
+
         fetch(
             "http://localhost/SECV2223-Final-Project/server/api/user/login.php",
             {
                 method: "POST",
                 credentials: "include",
+                signal: controller.signal,
             }
         )
             .then((response) => {
@@ -57,6 +60,10 @@ export default function App() {
                 // User not logged in.
                 userCtx.setValue(null);
             });
+
+        return () => {
+            controller.abort();
+        };
     }, [location.pathname, navigate, userCtx]);
 
     return (
