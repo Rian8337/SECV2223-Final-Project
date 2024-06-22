@@ -55,7 +55,7 @@ if (isset($_COOKIE["sessionId"])) {
 
 if (!$user) {
     unset($_COOKIE["sessionId"]);
-    setcookie("sessionId", "", time() - 3600);
+    setcookie("sessionId", "", -1);
 
     http_response_code(401);
     exit();
