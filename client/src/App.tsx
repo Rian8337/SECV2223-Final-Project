@@ -41,10 +41,14 @@ export default function App() {
         )
             .then((response) => {
                 switch (response.status) {
-                    case 200:
-                        return response.json();
+                    case 400:
+                        throw new Error("Missing credentials.");
+                    case 401:
+                        throw new Error("Invalid session ID.");
+                    case 500:
+                        throw new Error("Server error.");
                     default:
-                        throw new Error();
+                        return response.json();
                 }
             })
             .then((data: User) => {
@@ -65,7 +69,8 @@ export default function App() {
         return () => {
             controller.abort();
         };
-    }, [location.pathname, navigate, userCtx]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <>
