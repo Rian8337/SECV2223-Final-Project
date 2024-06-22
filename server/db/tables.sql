@@ -30,10 +30,10 @@ CREATE TABLE IF NOT EXISTS `todo` (
     `description` TEXT DEFAULT NULL,
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
     `completed` BOOLEAN DEFAULT FALSE,
-    `user_id` INT NOT NULL,
+    `user_id` INT DEFAULT NULL,
     `family_id` INT NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE SET NULL,
     FOREIGN KEY (`family_id`) REFERENCES `family`(`id`) ON DELETE CASCADE,
     INDEX `family_id_idx` (`family_id` ASC),
     INDEX `created_at_idx` (`created_at` DESC)
