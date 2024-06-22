@@ -1,10 +1,11 @@
 import React, { useContext, useRef, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
-import "./RegisterForm.css";
 import { UserContext } from "../../hooks/UserContext";
 import UserService from "../../infrastructure/user";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterForm() {
+    const navigate = useNavigate();
     const userCtx = useContext(UserContext);
     const themeCtx = useContext(ThemeContext);
 
@@ -52,7 +53,7 @@ export default function RegisterForm() {
     }
 
     return (
-        <form className="register-form" onSubmit={register}>
+        <form className="vertical-form" onSubmit={register}>
             <input
                 name="name"
                 type="text"
@@ -99,9 +100,26 @@ export default function RegisterForm() {
 
             {error !== null ? <p className="error">{error}</p> : null}
 
-            <button type="submit" disabled={isRegistering}>
-                Register
-            </button>
+            <div className="vertical-form-section">
+                <button
+                    className={`${themeCtx.theme}-button`}
+                    type="submit"
+                    disabled={isRegistering}
+                >
+                    Register
+                </button>
+
+                <button
+                    className={`${themeCtx.theme}-button`}
+                    type="button"
+                    onClick={() => {
+                        navigate("/login");
+                    }}
+                    disabled={isRegistering}
+                >
+                    Have an account? Login
+                </button>
+            </div>
         </form>
     );
 }

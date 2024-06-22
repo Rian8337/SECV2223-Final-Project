@@ -118,20 +118,83 @@ button.darker-button:hover {
     background-color: #001f29;
 }
 
+/* Line-break themes */
+hr {
+    clear: both;
+    display: block;
+    width: 90%;
+    margin: 1em 0;
+}
+
+hr.standard {
+    border: 1px solid rgb(247, 226, 223);
+}
+
+hr.light {
+    border: 1px solid #1a150e;
+}
+
+hr.darker {
+    border: 1px solid white;
+}
+
 /* Keep anchor links at current color */
 a {
     color: inherit;
     text-decoration: none;
 }
 
+/* Vertical form */
+.vertical-form {
+    display: flex;
+    font-size: 1.7rem;
+    justify-content: center;
+    margin: 15px 0;
+    padding: 0.8rem;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+}
+
+.vertical-form input {
+    padding: 0.75rem;
+    font-size: 0.65em;
+    border: none;
+    outline: none;
+    border-radius: 1em;
+    max-width: 500px;
+    transition: background-color 200ms ease-in-out;
+    width: 100%;
+}
+
+.vertical-form *:nth-child(n + 2) {
+    margin-top: 0.5em;
+}
+
+.vertical-form button {
+    padding: 10px;
+    font-size: 0.65em;
+    border-radius: 1em;
+    min-width: 100px;
+}
+
+.vertical-form-section *:nth-child(n + 2) {
+    margin-left: 1em;
+}
+
+.vertical-form .error {
+    color: red;
+    font-size: 0.75em;
+    font-weight: bold;
+}
+
 /* Responsive design */
 
+/* Responsive design */
 @media only screen and (max-width: 400px) {
-    form input {
-        border-radius: 17px;
-    }
-
-    form > button.light-button {
-        box-shadow: 0 0 5px lightgray;
+    .vertical-form button {
+        border-radius: 0.75em;
+        font-size: 0.6em;
+        width: 50%;
     }
 }

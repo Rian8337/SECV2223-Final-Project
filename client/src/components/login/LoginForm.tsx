@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { useNavigate } from "react-router-dom";
-import "./LoginForm.css";
 import { UserContext } from "../../hooks/UserContext";
 import UserService from "../../infrastructure/user";
 
@@ -45,7 +44,7 @@ export default function LoginForm() {
     }
 
     return (
-        <form className="login-form" onSubmit={login}>
+        <form className="vertical-form" onSubmit={login}>
             <input
                 name="email"
                 type="email"
@@ -67,7 +66,7 @@ export default function LoginForm() {
 
             {error !== null ? <p className="error">{error}</p> : null}
 
-            <div className="login-form-section">
+            <div className="vertical-form-section">
                 <button className={`${themeCtx.theme}-button`} type="submit">
                     Login
                 </button>
@@ -80,7 +79,7 @@ export default function LoginForm() {
                     }}
                     disabled={isLoggingIn}
                 >
-                    Register
+                    Don&apos;t have an account? Register an account
                 </button>
             </div>
         </form>
