@@ -5,23 +5,27 @@ require_once('../../db/Db.php');
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo "Invalid request method.";
     http_response_code(405);
     exit();
 }
 
 if (!isset($_POST["name"], $_POST["email"], $_POST["password"])) {
+    echo "Please enter a valid name, email, and password.";
     http_response_code(400);
     exit();
 }
 
 // Check if email is valid
 if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    echo "Please enter a valid email.";
     http_response_code(400);
     exit();
 }
 
 // Check if password is properly hashed
 if (strlen($_POST['password']) !== 64) {
+    echo "Please enter a valid password.";
     http_response_code(400);
     exit();
 }
@@ -36,6 +40,7 @@ if ($db->query(
         $db->escapeString($_POST['email'])
     )
 )->fetch_assoc()) {
+    echo "Email is already registered.";
     http_response_code(409);
     exit();
 }
@@ -54,6 +59,7 @@ $result = $db->query(
 );
 
 if (!$result) {
+    echo "Failed to register. Please try again later.";
     http_response_code(500);
     exit();
 }

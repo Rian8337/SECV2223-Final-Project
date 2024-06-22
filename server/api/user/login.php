@@ -5,6 +5,7 @@ require_once('../../db/Db.php');
 
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo "Invalid request method.";
     http_response_code(405);
     exit();
 }
@@ -22,18 +23,21 @@ if (isset($_COOKIE["sessionId"])) {
     )->fetch_assoc();
 } else {
     if (!isset($_POST["email"], $_POST["password"])) {
+        echo "Invalid email or password.";
         http_response_code(400);
         exit();
     }
 
     // Check if email is valid
     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        echo "Invalid email or password.";
         http_response_code(400);
         exit();
     }
 
     // Check if password is properly hashed
     if (strlen($_POST['password']) !== 64) {
+        echo "Invalid email or password.";
         http_response_code(400);
         exit();
     }
@@ -48,6 +52,12 @@ if (isset($_COOKIE["sessionId"])) {
 }
 
 if (!$user) {
+    if (isset($_COOKIE["sessionId"])) {
+        echo "Invalid session. Please log in again.";
+    } else {
+        echo "Invalid email or password.";
+    }
+
     unset($_COOKIE["sessionId"]);
     setcookie("sessionId", "", -1);
 
@@ -57,6 +67,7 @@ if (!$user) {
 
 // Validate password if available
 if (isset($_POST["password"]) && $user['password'] !== $_POST['password']) {
+    echo "Invalid email or password.";
     http_response_code(401);
     exit();
 }

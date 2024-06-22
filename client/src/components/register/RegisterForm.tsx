@@ -55,17 +55,12 @@ export default function RegisterForm() {
                         body: searchParams,
                     }
                 )
-                    .then((response) => {
-                        switch (response.status) {
-                            case 400:
-                                throw new Error("Missing credentials.");
-                            case 409:
-                                throw new Error("Email already in use.");
-                            case 500:
-                                throw new Error("Server error.");
-                            default:
-                                return response.json();
+                    .then(async (response) => {
+                        if (!response.ok) {
+                            throw new Error(await response.text());
                         }
+
+                        return response.json();
                     })
                     .then((data: Pick<User, "id" | "name" | "family_id">) => {
                         userCtx.setValue({
