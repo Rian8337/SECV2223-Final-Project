@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef, useContext } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { TodoContext } from "../../hooks/TodoContext";
-import { Todo } from "../../types/Todo";
+import { Todo } from "../../model/Todo";
 import "./TodoItem.css";
 
 export default function TodoItem(props: { todo: Todo }) {

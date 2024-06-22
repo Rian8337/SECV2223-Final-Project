@@ -1,4 +1,4 @@
-import { Todo } from "../../types/Todo";
+import { Todo } from "../../model/Todo";
 import { TodoApi } from "./interfaces";
 
 /**

@@ -1,4 +1,4 @@
-import { User } from "../../types/User";
+import { User } from "../../model/User";
 
 /**
  * API for interacting with user-related data.

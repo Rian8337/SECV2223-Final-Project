@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext, useState } from "react";
-import { User } from "../types/User";
+import { User } from "../model/User";
 
 const defaultValue = undefined;
 

@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext, useState } from "react";
-import { Todo } from "../types/Todo";
+import { Todo } from "../model/Todo";
 
 const defaultValue = [] as readonly Todo[];
 

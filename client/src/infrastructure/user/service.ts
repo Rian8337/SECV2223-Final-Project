@@ -1,4 +1,4 @@
-import { User } from "../../types/User";
+import { User } from "../../model/User";
 import { encodePassword } from "../../utils/TextEncoder";
 import { UserApi } from "./interfaces";
 
