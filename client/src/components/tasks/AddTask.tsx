@@ -24,10 +24,7 @@ export default function AddTask() {
             return;
         }
 
-        todoCtx.addTodo({
-            task: task,
-            checked: false,
-        });
+        todoCtx.setTodos([]);
 
         // Empty the input field.
         todoInputRef.current.value = "";
