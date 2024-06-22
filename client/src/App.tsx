@@ -14,6 +14,7 @@ import RegisterPage from "./pages/RegisterPage";
 import { UserContext } from "./hooks/UserContext";
 import { useContext, useEffect } from "react";
 import { User } from "./types/User";
+import TaskPage from "./pages/TaskPage";
 
 export default function App() {
     const location = useLocation();
@@ -101,6 +102,17 @@ export default function App() {
                                 <Navigate to={"/"} />
                             ) : (
                                 <RegisterPage />
+                            )
+                        }
+                    />
+
+                    <Route
+                        path="/tasks"
+                        element={
+                            isAuthenticated ? (
+                                <TaskPage />
+                            ) : (
+                                <Navigate to={"/login"} />
                             )
                         }
                     />

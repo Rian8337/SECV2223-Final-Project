@@ -1,6 +1,7 @@
 import ThemeSelector from "./ThemeSelector";
 import TopMenu from "./TopMenu";
 import "./Header.css";
+import DateTime from "./DateTime";
 
 export default function Header() {
     return (
@@ -11,6 +12,7 @@ export default function Header() {
             </div>
 
             <h1 id="title">To-Do List</h1>
+            <DateTime />
         </div>
     );
 }
