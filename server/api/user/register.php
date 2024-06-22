@@ -9,13 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-$db = new Db();
-
-if ($db === null) {
-    http_response_code(500);
-    exit();
-}
-
 if (!isset($_POST["name"], $_POST["email"], $_POST["password"])) {
     http_response_code(400);
     exit();
@@ -32,6 +25,8 @@ if (strlen($_POST['password']) !== 64) {
     http_response_code(400);
     exit();
 }
+
+$db = new Db();
 
 // Check if email is registered
 if ($db->query(

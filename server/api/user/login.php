@@ -10,12 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $db = new Db();
-
-if ($db === null) {
-    http_response_code(500);
-    exit();
-}
-
 $user = null;
 
 if (isset($_COOKIE["sessionId"])) {
