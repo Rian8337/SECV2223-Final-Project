@@ -2,7 +2,7 @@ import { Todo } from "../../types/Todo";
 import { baseApiUrl } from "../baseApi";
 import { TodoApi } from "./interfaces";
 
-const baseUrl = new URL("todo", baseApiUrl);
+const baseUrl = new URL("todo/", baseApiUrl);
 
 export default {
     async getTodos(searchedTitle, signal) {

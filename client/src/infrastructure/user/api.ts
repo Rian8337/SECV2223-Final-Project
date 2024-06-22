@@ -2,11 +2,11 @@ import { User } from "../../types/User";
 import { baseApiUrl } from "../baseApi";
 import { UserApi } from "./interfaces";
 
-const baseUrl = new URL("user", baseApiUrl);
+const baseUrl = new URL("user/", baseApiUrl);
 
 export default {
     async login(email, password, signal) {
-        const url = new URL("login", baseUrl);
+        const url = new URL("login.php", baseUrl);
         const searchParams = new URLSearchParams();
 
         searchParams.set("email", email);
@@ -30,7 +30,7 @@ export default {
     },
 
     async loginWithCookie(signal) {
-        const url = new URL("login", baseUrl);
+        const url = new URL("login.php", baseUrl);
 
         const response = await fetch(url, {
             method: "POST",
@@ -49,7 +49,7 @@ export default {
     },
 
     async register(name, email, password, signal) {
-        const url = new URL("register", baseUrl);
+        const url = new URL("register.php", baseUrl);
         const searchParams = new URLSearchParams();
 
         searchParams.set("name", name);

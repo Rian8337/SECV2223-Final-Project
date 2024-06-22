@@ -1,7 +1,7 @@
 import { Todo } from "../../types/Todo";
 
 /**
- * API for interacting with todo.
+ * API for interacting with todo-related data.
  */
 export interface TodoApi {
     /**

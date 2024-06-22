@@ -1,7 +1,7 @@
 import { User } from "../../types/User";
 
 /**
- * API for interacting with the user.
+ * API for interacting with user-related data.
  */
 export interface UserApi {
     /**
