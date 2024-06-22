@@ -74,4 +74,5 @@ $user = $db->query(
 // Invalidate login after 1 day
 setcookie("sessionId", $sessionId, time() + 60 * 60 * 24, "", "", true, true);
 
+http_response_code(201);
 echo json_encode($user, JSON_NUMERIC_CHECK);
