@@ -40,7 +40,7 @@ if ($db->query(
     exit();
 }
 
-$sessionId = bin2hex(random_bytes(16));
+$sessionId = bin2hex(random_bytes(32));
 
 $result = $db->query(
     sprintf(

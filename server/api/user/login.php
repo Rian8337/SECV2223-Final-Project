@@ -61,7 +61,7 @@ if (isset($_POST["password"]) && $user['password'] !== $_POST['password']) {
     exit();
 }
 
-$sessionId = isset($_POST["password"]) ? bin2hex(random_bytes(16)) : $user['session_id'];
+$sessionId = isset($_POST["password"]) ? bin2hex(random_bytes(32)) : $user['session_id'];
 
 // Invalidate login after 1 day
 setcookie("sessionId", $sessionId, time() + 60 * 60 * 24, "/", "", true, true);
