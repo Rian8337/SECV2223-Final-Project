@@ -1,14 +1,29 @@
 /**
- * Represents the structure of a todo stored in local storage.
+ * Represents a todo.
  */
 export interface Todo {
     /**
-     * The task of the todo.
+     * The ID of the todo.
      */
-    readonly task: string;
+    readonly id: number;
 
     /**
-     * Whether the todo is checked.
+     * The title of the todo.
      */
-    checked: boolean;
+    title: string;
+
+    /**
+     * The description of the todo.
+     */
+    description: string | null;
+
+    /**
+     * The date the todo was created.
+     */
+    readonly created_at: string;
+
+    /**
+     * Whether the todo is completed.
+     */
+    completed: boolean;
 }

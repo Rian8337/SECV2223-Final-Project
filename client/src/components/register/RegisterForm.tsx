@@ -1,9 +1,8 @@
 import React, { useContext, useRef, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import "./RegisterForm.css";
-import { encodePassword } from "../../utils/TextEncoder";
-import { User } from "../../types/User";
 import { UserContext } from "../../hooks/UserContext";
+import UserService from "../../infrastructure/user";
 
 export default function RegisterForm() {
     const userCtx = useContext(UserContext);
@@ -30,58 +29,13 @@ export default function RegisterForm() {
         setIsRegistering(true);
 
         const formData = new FormData(event.currentTarget);
+        const name = formData.get("name") as string;
+        const email = formData.get("email") as string;
+        const password = formData.get("password") as string;
 
-        // Need to use URLSearchParams instead of FormData as FormData
-        // doesn't support setting the Content-Type header to
-        // application/x-www-form-urlencoded.
-        const searchParams = new URLSearchParams();
-
-        searchParams.append("name", formData.get("name") as string);
-        searchParams.append("email", formData.get("email") as string);
-
-        encodePassword(formData.get("password") as string)
-            .then((hashedPassword) => {
-                searchParams.append("password", hashedPassword);
-
-                // Send name, email, and hashed password to server
-                fetch(
-                    "http://localhost/SECV2223-Final-Project/server/api/user/register.php",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded",
-                        },
-                        credentials: "include",
-                        body: searchParams,
-                    }
-                )
-                    .then(async (response) => {
-                        if (!response.ok) {
-                            throw new Error(await response.text());
-                        }
-
-                        return response.json();
-                    })
-                    .then((data: Pick<User, "id" | "name" | "family_id">) => {
-                        userCtx.setValue({
-                            ...data,
-                            email: formData.get("email") as string,
-                        });
-
-                        setError(null);
-                    })
-                    .catch((e: unknown) => {
-                        console.error(e);
-
-                        setError(
-                            e instanceof Error
-                                ? e.message
-                                : "An error occurred. Please try again later."
-                        );
-                    })
-                    .finally(() => {
-                        setIsRegistering(false);
-                    });
+        UserService.register(name, email, password)
+            .then((user) => {
+                userCtx.setValue(user);
             })
             .catch((e: unknown) => {
                 console.error(e);

@@ -2,9 +2,8 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
-import { encodePassword } from "../../utils/TextEncoder";
 import { UserContext } from "../../hooks/UserContext";
-import { User } from "../../types/User";
+import UserService from "../../infrastructure/user";
 
 export default function LoginForm() {
     const navigate = useNavigate();
@@ -22,57 +21,14 @@ export default function LoginForm() {
         setIsLoggingIn(true);
 
         const formData = new FormData(event.currentTarget);
+        const email = formData.get("email") as string;
+        const password = formData.get("password") as string;
 
-        // Need to use URLSearchParams instead of FormData as FormData
-        // doesn't support setting the Content-Type header to
-        // application/x-www-form-urlencoded.
-        const searchParams = new URLSearchParams();
+        UserService.login(email, password)
+            .then((user) => {
+                userCtx.setValue(user);
 
-        searchParams.append("email", formData.get("email") as string);
-
-        encodePassword(formData.get("password") as string)
-            .then((hashedPassword) => {
-                searchParams.append("password", hashedPassword);
-
-                // Send email and hashed password to server
-                fetch(
-                    "http://localhost/SECV2223-Final-Project/server/api/user/login.php",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/x-www-form-urlencoded",
-                        },
-                        credentials: "include",
-                        body: searchParams,
-                    }
-                )
-                    .then(async (response) => {
-                        if (!response.ok) {
-                            throw new Error(await response.text());
-                        }
-
-                        return response.json();
-                    })
-                    .then((data: Pick<User, "id" | "name" | "family_id">) => {
-                        userCtx.setValue({
-                            ...data,
-                            email: formData.get("email") as string,
-                        });
-
-                        navigate("/");
-                    })
-                    .catch((e: unknown) => {
-                        console.error(e);
-
-                        setError(
-                            e instanceof Error
-                                ? e.message
-                                : "An error occurred. Please try again later."
-                        );
-                    })
-                    .finally(() => {
-                        setIsLoggingIn(false);
-                    });
+                navigate("/");
             })
             .catch((e: unknown) => {
                 console.error(e);

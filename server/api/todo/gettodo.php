@@ -46,9 +46,9 @@ $query = sprintf(
     $user["family_id"]
 );
 
-// If title is set, filter by title.
-if (isset($_GET["title"])) {
-    $query .= sprintf(" AND title LIKE '%s%'", $db->escapeString($_GET["title"]));
+// If searched title is set, filter by title.
+if (isset($_GET["searchedTitle"])) {
+    $query .= sprintf(" AND title LIKE '%s%'", $db->escapeString($_GET["searchedTitle"]));
 }
 
 $page = isset($_GET["page"]) ? intval($_GET["page"]) : 0;

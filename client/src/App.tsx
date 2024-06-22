@@ -13,8 +13,8 @@ import FamilyPage from "./pages/FamilyPage";
 import RegisterPage from "./pages/RegisterPage";
 import { UserContext } from "./hooks/UserContext";
 import { useContext, useEffect } from "react";
-import { User } from "./types/User";
 import TaskPage from "./pages/TaskPage";
+import UserService from "./infrastructure/user";
 
 export default function App() {
     const location = useLocation();
@@ -31,28 +31,9 @@ export default function App() {
         // Try to login user in case the session is still valid.
         const controller = new AbortController();
 
-        fetch(
-            "http://localhost/SECV2223-Final-Project/server/api/user/login.php",
-            {
-                method: "POST",
-                credentials: "include",
-                signal: controller.signal,
-            }
-        )
-            .then((response) => {
-                switch (response.status) {
-                    case 400:
-                        throw new Error("Missing credentials.");
-                    case 401:
-                        throw new Error("Invalid session ID.");
-                    case 500:
-                        throw new Error("Server error.");
-                    default:
-                        return response.json();
-                }
-            })
-            .then((data: User) => {
-                userCtx.setValue(data);
+        UserService.loginWithCookie(controller.signal)
+            .then((user) => {
+                userCtx.setValue(user);
 
                 if (
                     location.pathname === "/login" ||
