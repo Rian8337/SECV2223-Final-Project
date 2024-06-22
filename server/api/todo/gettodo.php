@@ -1,20 +1,9 @@
 <?php
 
-require_once("../../Env.php");
+require_once("../../core/Env.php");
 require_once('../../db/Db.php');
-
-// Only allow GET requests
-if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    echo "Invalid request method.";
-    http_response_code(405);
-    exit();
-}
-
-if (!isset($_COOKIE["sessionId"]) || strlen($_COOKIE["sessionId"]) !== 64) {
-    echo "Invalid session. Please log in again.";
-    http_response_code(401);
-    exit();
-}
+require_once("../../core/GETOnly.php");
+require_once("../../core/CheckCookie.php");
 
 $db = new Db();
 $user = $db->query(

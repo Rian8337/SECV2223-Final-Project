@@ -1,14 +1,8 @@
 <?php
 
-require_once("../../Env.php");
+require_once("../../core/Env.php");
 require_once('../../db/Db.php');
-
-// Only allow POST requests
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo "Invalid request method.";
-    http_response_code(405);
-    exit();
-}
+require_once("../../core/POSTOnly.php");
 
 if (!isset($_POST["name"], $_POST["email"], $_POST["password"])) {
     echo "Please enter a valid name, email, and password.";

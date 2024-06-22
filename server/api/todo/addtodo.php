@@ -1,20 +1,9 @@
 <?php
 
-require_once("../../Env.php");
+require_once("../../core/Env.php");
 require_once('../../db/Db.php');
-
-// Only allow POST requests
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    echo "Invalid request method.";
-    http_response_code(405);
-    exit();
-}
-
-if (!isset($_COOKIE["sessionId"]) || strlen($_COOKIE["sessionId"]) !== 64) {
-    echo "Invalid session. Please log in again.";
-    http_response_code(401);
-    exit();
-}
+require_once("../../core/POSTOnly.php");
+require_once("../../core/CheckCookie.php");
 
 if (!isset($_POST["title"])) {
     echo "Please enter a valid title.";
