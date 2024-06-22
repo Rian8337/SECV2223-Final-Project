@@ -29,7 +29,6 @@ CREATE TABLE IF NOT EXISTS `todo` (
     `title` VARCHAR(255) NOT NULL,
     `description` TEXT DEFAULT NULL,
     `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-    `due_date` DATE DEFAULT NULL,
     `completed` BOOLEAN DEFAULT FALSE,
     `user_id` INT NOT NULL,
     `family_id` INT NOT NULL,
