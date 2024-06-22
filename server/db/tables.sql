@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `user` (
     `session_id` VARCHAR(64) DEFAULT NULL,
     `family_id` INT DEFAULT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`family_id`) REFERENCES `family`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`family_id`) REFERENCES `family`(`id`) ON DELETE SET NULL,
     UNIQUE INDEX `email_UNIQUE_idx` (`email` ASC),
     UNIQUE INDEX `session_id_UNIQUE_idx` (`session_id` ASC)
 ) ENGINE = InnoDB;
