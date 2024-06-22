@@ -168,7 +168,7 @@ a {
 }
 
 .vertical-form *:nth-child(n + 2) {
-    margin-top: 0.5em;
+    margin-top: 1em;
 }
 
 .vertical-form button {
