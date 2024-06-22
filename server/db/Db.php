@@ -17,7 +17,8 @@ class Db
 
         if ($this->db->connect_error) {
             http_response_code(500);
-            die("Server-side database connection failed");
+            echo "Server-side database connection failed";
+            die();
         }
     }
 
