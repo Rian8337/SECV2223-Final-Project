@@ -9,8 +9,10 @@ import { UserContext } from "./hooks/UserContext";
 import { useContext, useEffect } from "react";
 import TaskPage from "./pages/TaskPage";
 import UserService from "./infrastructure/user";
+import { ThemeContext } from "./hooks/ThemeContext";
 
 export default function App() {
+    const themeCtx = useContext(ThemeContext);
     const userCtx = useContext(UserContext);
 
     useEffect(() => {
@@ -54,6 +56,8 @@ export default function App() {
     return (
         <>
             <Header />
+
+            <hr className={themeCtx.theme} />
 
             <AnimatePresence mode="wait">
                 <Routes>
