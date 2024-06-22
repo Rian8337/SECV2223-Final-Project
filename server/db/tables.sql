@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `todo` (
     `id` INT NOT NULL AUTO_INCREMENT,
     `title` VARCHAR(255) NOT NULL,
     `description` TEXT DEFAULT NULL,
-    `due_date` DATE NOT NULL,
+    `due_date` DATE DEFAULT NULL,
     `completed` BOOLEAN DEFAULT FALSE,
     `user_id` INT NOT NULL,
     `family_id` INT NOT NULL,
