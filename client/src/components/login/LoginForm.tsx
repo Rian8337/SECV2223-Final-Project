@@ -68,7 +68,7 @@ export default function LoginForm() {
 
             <div className="vertical-form-section">
                 <button className={`${themeCtx.theme}-button`} type="submit">
-                    Login
+                    {isLoggingIn ? "Logging in..." : "Login"}
                 </button>
 
                 <button

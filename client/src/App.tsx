@@ -1,12 +1,6 @@
 import { AnimatePresence } from "framer-motion";
 import Header from "./components/header/Header";
-import {
-    Navigate,
-    Route,
-    Routes,
-    useLocation,
-    useNavigate,
-} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import FamilyPage from "./pages/FamilyPage";
@@ -17,11 +11,7 @@ import TaskPage from "./pages/TaskPage";
 import UserService from "./infrastructure/user";
 
 export default function App() {
-    const location = useLocation();
-    const navigate = useNavigate();
     const userCtx = useContext(UserContext);
-
-    const isAuthenticated = !!userCtx.value;
 
     useEffect(() => {
         if (userCtx.value !== undefined) {
@@ -34,15 +24,12 @@ export default function App() {
         UserService.loginWithCookie(controller.signal)
             .then((user) => {
                 userCtx.setValue(user);
-
-                if (
-                    location.pathname === "/login" ||
-                    location.pathname === "/register"
-                ) {
-                    navigate("/");
-                }
             })
-            .catch(() => {
+            .catch((e: unknown) => {
+                if (e instanceof DOMException && e.name === "AbortError") {
+                    return;
+                }
+
                 // User not logged in.
                 userCtx.setValue(null);
             });
@@ -50,8 +37,19 @@ export default function App() {
         return () => {
             controller.abort();
         };
+        // We only want this hook to run once.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    if (userCtx.value === undefined) {
+        return (
+            <>
+                <Header />
+
+                <p>Loading...</p>
+            </>
+        );
+    }
 
     return (
         <>
@@ -59,49 +57,10 @@ export default function App() {
 
             <AnimatePresence mode="wait">
                 <Routes>
-                    <Route
-                        path="/family"
-                        element={
-                            isAuthenticated ? (
-                                <FamilyPage />
-                            ) : (
-                                <Navigate to={"/login"} />
-                            )
-                        }
-                    />
-
-                    <Route
-                        path="/login"
-                        element={
-                            isAuthenticated ? (
-                                <Navigate to={"/"} />
-                            ) : (
-                                <LoginPage />
-                            )
-                        }
-                    />
-
-                    <Route
-                        path="/register"
-                        element={
-                            isAuthenticated ? (
-                                <Navigate to={"/"} />
-                            ) : (
-                                <RegisterPage />
-                            )
-                        }
-                    />
-
-                    <Route
-                        path="/tasks"
-                        element={
-                            isAuthenticated ? (
-                                <TaskPage />
-                            ) : (
-                                <Navigate to={"/login"} />
-                            )
-                        }
-                    />
+                    <Route path="/family" element={<FamilyPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/tasks" element={<TaskPage />} />
 
                     <Route path="*" element={<HomePage />} />
                 </Routes>

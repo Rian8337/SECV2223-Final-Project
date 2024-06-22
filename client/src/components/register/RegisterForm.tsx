@@ -106,7 +106,7 @@ export default function RegisterForm() {
                     type="submit"
                     disabled={isRegistering}
                 >
-                    Register
+                    {isRegistering ? "Registering..." : "Register"}
                 </button>
 
                 <button
