@@ -94,10 +94,10 @@ if (!$updateResult) {
     exit();
 }
 
-// Obtain the updated todo structure, with creation date converted to ISO-8601 string format
+// Obtain the updated todo structure
 $todo = $db->query(
     sprintf(
-        "SELECT id, title, description, DATE_FORMAT(created_at, '%%Y-%%m-%%dT%%H:%%i:%%s0Z'), user_id FROM %s WHERE id = %d",
+        "SELECT id, title, description, created_at, user_id FROM %s WHERE id = %d",
         Db::todo_table,
         $todo["id"]
     )
