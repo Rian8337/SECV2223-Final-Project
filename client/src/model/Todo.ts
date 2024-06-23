@@ -18,7 +18,7 @@ export interface Todo {
     description: string | null;
 
     /**
-     * The date the todo was created.
+     * The date the todo was created in ISO-8601 format.
      */
     readonly created_at: string;
 
