@@ -6,7 +6,7 @@ const baseUrl = new URL("todo/", baseApiUrl);
 
 export default {
     async getTodos(searchedTitle, signal) {
-        const url = new URL("gettodo.php", baseUrl);
+        const url = new URL("gettodos.php", baseUrl);
         const searchParams = new URLSearchParams();
 
         if (searchedTitle) {
