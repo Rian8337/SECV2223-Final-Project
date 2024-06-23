@@ -46,4 +46,28 @@ $query .= " ORDER BY created_at DESC LIMIT " . $page * 20 . ", 10";
 
 $todos = $db->query($query)->fetch_all(MYSQLI_ASSOC);
 
+// Replace user IDs with users who created the todos
+$todoCreators = $db->query(
+    sprintf(
+        "SELECT id, name FROM %s WHERE family_id = %d",
+        Db::user_table,
+        $user["family_id"]
+    )
+)->fetch_all(MYSQLI_ASSOC);
+
+foreach ($todos as &$todo) {
+    foreach ($todoCreators as $creator) {
+        if ($creator["id"] === $todo["user_id"]) {
+            $todo["user"] = array(
+                "id" => $creator["id"],
+                "name" => $creator["name"]
+            );
+
+            unset($todo["user_id"]);
+
+            break;
+        }
+    }
+}
+
 echo json_encode($todos, JSON_NUMERIC_CHECK);

@@ -109,4 +109,26 @@ if (!$todo) {
     exit();
 }
 
+// Replace user ID with the user who created the todo
+$todoCreator = $db->query(
+    sprintf(
+        "SELECT name FROM %s WHERE id = %d",
+        Db::user_table,
+        $todo["user_id"]
+    )
+)->fetch_assoc();
+
+if (!$todoCreator) {
+    echo "Failed to find user.";
+    http_response_code(500);
+    exit();
+}
+
+$todo["user"] = array(
+    "id" => $todo["user_id"],
+    "name" => $todoCreator["name"]
+);
+
+unset($todo["user_id"]);
+
 echo json_encode($todo, JSON_NUMERIC_CHECK);
