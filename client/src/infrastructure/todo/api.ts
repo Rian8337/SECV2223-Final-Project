@@ -16,7 +16,7 @@ export default {
         }
 
         const response = await fetch(url, {
-            method: "PUT",
+            method: "POST",
             credentials: "include",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",

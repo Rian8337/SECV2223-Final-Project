@@ -2,10 +2,10 @@
 
 require_once("../../core/Env.php");
 require_once('../../db/Db.php');
-require_once("../../core/PUTOnly.php");
+require_once("../../core/POSTOnly.php");
 require_once("../../core/CheckCookie.php");
 
-if (!isset($_PUT["title"])) {
+if (!isset($_POST["title"])) {
     echo "Please enter a valid title.";
     http_response_code(400);
     exit();
@@ -14,7 +14,7 @@ if (!isset($_PUT["title"])) {
 $db = new Db();
 $user = $db->query(
     sprintf(
-        "SELECT id FROM %s WHERE session_id = '%s'",
+        "SELECT id, family_id FROM %s WHERE session_id = '%s'",
         Db::user_table,
         $db->escapeString($_COOKIE['sessionId'])
     )
@@ -37,15 +37,15 @@ if (!isset($user["family_id"])) {
 
 // Optionally add description, where the description may contain multiple words
 $description = "NULL";
-if (isset($_PUT["description"])) {
-    $description = sprintf("'%s'", $db->escapeString($_PUT["description"]));
+if (isset($_POST["description"])) {
+    $description = sprintf("'%s'", $db->escapeString($_POST["description"]));
 }
 
 $insertResult = $db->query(
     sprintf(
         "INSERT INTO %s (title, description, user_id, family_id) VALUES ('%s', %s, %d, %d)",
         Db::todo_table,
-        $db->escapeString($_PUT["title"]),
+        $db->escapeString($_POST["title"]),
         $description,
         $user["id"],
         $user["family_id"]
