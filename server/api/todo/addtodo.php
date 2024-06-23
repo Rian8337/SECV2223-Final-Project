@@ -2,10 +2,10 @@
 
 require_once("../../core/Env.php");
 require_once('../../db/Db.php');
-require_once("../../core/POSTOnly.php");
+require_once("../../core/PUTOnly.php");
 require_once("../../core/CheckCookie.php");
 
-if (!isset($_POST["title"])) {
+if (!isset($_PUT["title"])) {
     echo "Please enter a valid title.";
     http_response_code(400);
     exit();
@@ -29,7 +29,7 @@ if (!$user) {
     exit();
 }
 
-if (!$user["family_id"]) {
+if (!isset($user["family_id"])) {
     echo "You are not part of a family. Please create or join a family first.";
     http_response_code(403);
     exit();
@@ -39,13 +39,13 @@ if (!$user["family_id"]) {
 // Description may contain multiple words
 // Insert due date as unix timestamp
 $description = "NULL";
-if (isset($_POST["description"])) {
-    $description = sprintf("'%s'", $db->escapeString($_POST["description"]));
+if (isset($_PUT["description"])) {
+    $description = sprintf("'%s'", $db->escapeString($_PUT["description"]));
 }
 
 $dueDate = "NULL";
-if (isset($_POST["due_date"])) {
-    $dueDate = strtotime($_POST["due_date"]);
+if (isset($_PUT["due_date"])) {
+    $dueDate = strtotime($_PUT["due_date"]);
 
     if ($dueDate === false) {
         http_response_code(400);
@@ -59,7 +59,7 @@ $insertResult = $db->query(
     sprintf(
         "INSERT INTO %s (title, description, due_date, user_id, family_id) VALUES ('%s', %s, %s, %d, %d)",
         Db::todo_table,
-        $db->escapeString($_POST["title"]),
+        $db->escapeString($_PUT["title"]),
         $description,
         $dueDate,
         $user["id"],
