@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import TodoList from "../components/tasks/TodoList";
+import TodoList from "../components/todo/TodoList";
 import { TodoContext } from "../hooks/TodoContext";
 import TodoService from "../infrastructure/todo";
-import "./TaskPage.css";
 import PageWrapper from "../components/PageWrapper";
+import AddTodo from "../components/todo/AddTodo";
+import { ThemeContext } from "../hooks/ThemeContext";
+import "./TodoPage.css";
 
-export default function TaskPage() {
+export default function TodoPage() {
+    const themeCtx = useContext(ThemeContext);
     const todoCtx = useContext(TodoContext);
     const [error, setError] = useState<string | null>(null);
 
@@ -16,19 +19,35 @@ export default function TaskPage() {
                 todoCtx.setTodos(data);
             })
             .catch((e: unknown) => {
+                console.error(e);
+
                 setError(
                     e instanceof Error
                         ? e.message
                         : "An error occurred. Please try again later."
                 );
             });
-    }, [todoCtx]);
+        // We only want to run this hook once.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    if (error !== null) {
+        return (
+            <PageWrapper>
+                <h2>Todo</h2>
+
+                <p className="todo-page-error">{error}</p>
+            </PageWrapper>
+        );
+    }
 
     return (
         <PageWrapper>
-            <h2>Tasks</h2>
+            <AddTodo />
 
-            {error ? <p className="task-page-error">{error}</p> : <TodoList />}
+            <hr className={themeCtx.theme} />
+
+            <TodoList />
         </PageWrapper>
     );
 }

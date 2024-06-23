@@ -7,7 +7,7 @@ import FamilyPage from "./pages/FamilyPage";
 import RegisterPage from "./pages/RegisterPage";
 import { UserContext } from "./hooks/UserContext";
 import { useContext, useEffect } from "react";
-import TaskPage from "./pages/TaskPage";
+import TodoPage from "./pages/TodoPage";
 import UserService from "./infrastructure/user";
 import { ThemeContext } from "./hooks/ThemeContext";
 
@@ -64,7 +64,7 @@ export default function App() {
                     <Route path="/family" element={<FamilyPage />} />
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/tasks" element={<TaskPage />} />
+                    <Route path="/todo" element={<TodoPage />} />
 
                     <Route path="*" element={<HomePage />} />
                 </Routes>

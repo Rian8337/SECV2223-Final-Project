@@ -1,3 +1,5 @@
+import { User } from "./User";
+
 /**
  * Represents a todo.
  */
@@ -18,7 +20,7 @@ export interface Todo {
     description: string | null;
 
     /**
-     * The date the todo was created in ISO-8601 format.
+     * The date the todo was created.
      */
     readonly created_at: string;
 
@@ -26,4 +28,9 @@ export interface Todo {
      * Whether the todo is completed.
      */
     completed: boolean;
+
+    /**
+     * The user who created the todo.
+     */
+    readonly user: Pick<User, "id" | "name"> | null;
 }
