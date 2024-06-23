@@ -31,7 +31,7 @@ if (!isset($user["family_id"])) {
 
 // Convert creation date converted to ISO-8601 string format
 $query = sprintf(
-    "SELECT id, title, description, DATE_FORMAT(created_at, '%Y-%m-%dT%H:%i:%s0Z'), user_id FROM %s WHERE family_id = %d",
+    "SELECT id, title, description, DATE_FORMAT(created_at, '%%Y-%%m-%%dT%%H:%%i:%%s0Z'), user_id FROM %s WHERE family_id = %d",
     Db::todo_table,
     $user["family_id"]
 );
