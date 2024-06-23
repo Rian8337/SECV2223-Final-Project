@@ -37,6 +37,7 @@ if (!isset($user["family_id"])) {
 
 // Optionally add description and due date (both default to null)
 // Description may contain multiple words
+// The received due date is in ISO-8601 string format
 // Insert due date as unix timestamp
 $description = "NULL";
 if (isset($_PUT["description"])) {
@@ -48,6 +49,7 @@ if (isset($_PUT["due_date"])) {
     $dueDate = strtotime($_PUT["due_date"]);
 
     if ($dueDate === false) {
+        echo "Invalid due date. Please enter a valid date in ISO-8601 format.";
         http_response_code(400);
         exit();
     }

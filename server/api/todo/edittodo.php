@@ -73,7 +73,7 @@ if (isset($_PATCH["due_date"])) {
     $dueDate = strtotime($_PATCH["due_date"]);
 
     if ($dueDate === false) {
-        echo "Invalid due date.";
+        echo "Invalid due date. Please enter a valid date in ISO-8601 format.";
         http_response_code(400);
         exit();
     }
