@@ -71,15 +71,13 @@ export default function FamilyPage() {
         );
     }
 
-    const line = <hr className={themeCtx.theme} />;
-
     return (
         <PageWrapper>
             <FamilyMemberList />
             <br />
             <AddFamilyMember />
 
-            {line}
+            <hr className={themeCtx.theme} />
 
             <EditFamilyDetails />
         </PageWrapper>
