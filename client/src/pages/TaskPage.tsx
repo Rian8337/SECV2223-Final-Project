@@ -3,6 +3,7 @@ import TodoList from "../components/tasks/TodoList";
 import { TodoContext } from "../hooks/TodoContext";
 import TodoService from "../infrastructure/todo";
 import "./TaskPage.css";
+import PageWrapper from "../components/PageWrapper";
 
 export default function TaskPage() {
     const todoCtx = useContext(TodoContext);
@@ -24,10 +25,10 @@ export default function TaskPage() {
     }, [todoCtx]);
 
     return (
-        <>
+        <PageWrapper>
             <h2>Tasks</h2>
 
             {error ? <p className="task-page-error">{error}</p> : <TodoList />}
-        </>
+        </PageWrapper>
     );
 }

@@ -10,7 +10,6 @@ import { useContext, useEffect } from "react";
 import TaskPage from "./pages/TaskPage";
 import UserService from "./infrastructure/user";
 import { ThemeContext } from "./hooks/ThemeContext";
-import PageWrapper from "./components/PageWrapper";
 
 export default function App() {
     const themeCtx = useContext(ThemeContext);
@@ -61,16 +60,14 @@ export default function App() {
             <hr className={themeCtx.theme} />
 
             <AnimatePresence mode="wait">
-                <PageWrapper>
-                    <Routes>
-                        <Route path="/family" element={<FamilyPage />} />
-                        <Route path="/login" element={<LoginPage />} />
-                        <Route path="/register" element={<RegisterPage />} />
-                        <Route path="/tasks" element={<TaskPage />} />
+                <Routes>
+                    <Route path="/family" element={<FamilyPage />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/tasks" element={<TaskPage />} />
 
-                        <Route path="*" element={<HomePage />} />
-                    </Routes>
-                </PageWrapper>
+                    <Route path="*" element={<HomePage />} />
+                </Routes>
             </AnimatePresence>
         </>
     );

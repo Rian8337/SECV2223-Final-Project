@@ -9,6 +9,7 @@ import "./FamilyPage.css";
 import { useNavigate } from "react-router-dom";
 import FamilyMemberList from "../components/family/FamilyMemberList";
 import AddFamilyMember from "../components/family/AddFamilyMember";
+import PageWrapper from "../components/PageWrapper";
 
 export default function FamilyPage() {
     const navigate = useNavigate();
@@ -47,21 +48,33 @@ export default function FamilyPage() {
     }, [userCtx.value]);
 
     if (!userCtx.value?.family_id) {
-        return <AddFamily />;
+        return (
+            <PageWrapper>
+                <AddFamily />
+            </PageWrapper>
+        );
     }
 
     if (!familyCtx.value) {
-        return <p>Loading family details...</p>;
+        return (
+            <PageWrapper>
+                <p>Loading family details...</p>
+            </PageWrapper>
+        );
     }
 
     if (error !== null) {
-        return <p className="family-page-error">{error}</p>;
+        return (
+            <PageWrapper>
+                <p className="family-page-error">{error}</p>
+            </PageWrapper>
+        );
     }
 
     const line = <hr className={themeCtx.theme} />;
 
     return (
-        <>
+        <PageWrapper>
             <FamilyMemberList />
             <br />
             <AddFamilyMember />
@@ -69,6 +82,6 @@ export default function FamilyPage() {
             {line}
 
             <EditFamilyDetails />
-        </>
+        </PageWrapper>
     );
 }
