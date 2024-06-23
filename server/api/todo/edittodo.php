@@ -69,18 +69,6 @@ if (isset($_PATCH["description"])) {
     $updates[] = sprintf("description = '%s'", $db->escapeString($_PATCH["description"]));
 }
 
-if (isset($_PATCH["due_date"])) {
-    $dueDate = strtotime($_PATCH["due_date"]);
-
-    if ($dueDate === false) {
-        echo "Invalid due date. Please enter a valid date in ISO-8601 format.";
-        http_response_code(400);
-        exit();
-    }
-
-    $updates[] = sprintf("due_date = FROM_UNIXTIME(%d)", $dueDate);
-}
-
 if (isset($_PATCH["completed"])) {
     $updates[] = sprintf("completed = %d", intval($_PATCH["completed"]));
 }
@@ -106,10 +94,10 @@ if (!$updateResult) {
     exit();
 }
 
-// Obtain the completely updated todo structure
+// Obtain the updated todo structure, with creation date converted to ISO-8601 string format
 $todo = $db->query(
     sprintf(
-        "SELECT * FROM %s WHERE id = %d",
+        "SELECT id, title, description, DATE_FORMAT(created_at, '%Y-%m-%dT%H:%i:%s0Z'), user_id FROM %s WHERE id = %d",
         Db::todo_table,
         $todo["id"]
     )

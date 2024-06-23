@@ -35,35 +35,18 @@ if (!isset($user["family_id"])) {
     exit();
 }
 
-// Optionally add description and due date (both default to null)
-// Description may contain multiple words
-// The received due date is in ISO-8601 string format
-// Insert due date as unix timestamp
+// Optionally add description, where the description may contain multiple words
 $description = "NULL";
 if (isset($_PUT["description"])) {
     $description = sprintf("'%s'", $db->escapeString($_PUT["description"]));
 }
 
-$dueDate = "NULL";
-if (isset($_PUT["due_date"])) {
-    $dueDate = strtotime($_PUT["due_date"]);
-
-    if ($dueDate === false) {
-        echo "Invalid due date. Please enter a valid date in ISO-8601 format.";
-        http_response_code(400);
-        exit();
-    }
-
-    $dueDate = sprintf("FROM_UNIXTIME(%d)", $dueDate);
-}
-
 $insertResult = $db->query(
     sprintf(
-        "INSERT INTO %s (title, description, due_date, user_id, family_id) VALUES ('%s', %s, %s, %d, %d)",
+        "INSERT INTO %s (title, description, user_id, family_id) VALUES ('%s', %s, %d, %d)",
         Db::todo_table,
         $db->escapeString($_PUT["title"]),
         $description,
-        $dueDate,
         $user["id"],
         $user["family_id"]
     )
@@ -75,13 +58,20 @@ if (!$insertResult) {
     exit();
 }
 
+// Obtain the newly added todo structure, with creation date converted to ISO-8601 string format
 $todo = $db->query(
     sprintf(
-        "SELECT id, title, description, due_date, user_id FROM %s WHERE id = %d",
+        "SELECT id, title, description, DATE_FORMAT(created_at, '%Y-%m-%dT%H:%i:%s0Z'), user_id FROM %s WHERE id = %d",
         Db::todo_table,
         $db->getDbConnection()->insert_id
     )
 )->fetch_assoc();
+
+if (!$todo) {
+    echo "Failed to find todo.";
+    http_response_code(500);
+    exit();
+}
 
 http_response_code(201);
 echo json_encode($todo, JSON_NUMERIC_CHECK);
