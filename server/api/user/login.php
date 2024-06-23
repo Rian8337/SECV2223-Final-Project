@@ -2,6 +2,7 @@
 
 require_once("../../core/Env.php");
 require_once('../../db/Db.php');
+require_once("../../core/POSTOnly.php");
 
 $db = new Db();
 $user = null;
