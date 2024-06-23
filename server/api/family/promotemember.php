@@ -1,0 +1,150 @@
+<?php
+
+require_once("../../core/Env.php");
+require_once('../../db/Db.php');
+require_once("../../core/PATCHOnly.php");
+require_once("../../core/CheckCookie.php");
+
+if (!isset($_PATCH["id"])) {
+    echo "Please enter a user ID.";
+    http_response_code(400);
+    exit();
+}
+
+if (!isset($_PATCH["role"])) {
+    echo "Please enter a role.";
+    http_response_code(400);
+    exit();
+}
+
+// Ensure the supplied ID can be converted to an integer
+if (!is_numeric($_PATCH["id"])) {
+    echo "Invalid user ID.";
+    http_response_code(400);
+    exit();
+}
+
+// Convert ID to integer
+$_PATCH["id"] = intval($_PATCH["id"]);
+
+if ($_PATCH["id"] < 1) {
+    echo "Invalid user ID.";
+    http_response_code(400);
+    exit();
+}
+
+// Ensure role is valid
+if ($_PATCH["role"] !== "admin" && $_PATCH["role"] !== "member") {
+    echo "Invalid role.";
+    http_response_code(400);
+    exit();
+}
+
+$db = new Db();
+
+$user = $db->query(
+    sprintf(
+        "SELECT id, family_id FROM %s WHERE session_id = '%s'",
+        Db::user_table,
+        $db->escapeString($_COOKIE['sessionId'])
+    )
+)->fetch_assoc();
+
+if (!$user) {
+    unset($_COOKIE["sessionId"]);
+    setcookie("sessionId", "", -1);
+
+    echo "Invalid session. Please log in again.";
+    http_response_code(401);
+    exit();
+}
+
+if (!isset($user["family_id"])) {
+    echo "You are not part of a family.";
+    http_response_code(403);
+    exit();
+}
+
+$userFamilyMember = $db->query(
+    sprintf(
+        "SELECT role FROM %s WHERE user_id = %d",
+        Db::family_member_table,
+        $user["id"]
+    )
+)->fetch_assoc();
+
+if (!$userFamilyMember) {
+    echo "You are not part of a family.";
+    http_response_code(403);
+    exit();
+}
+
+if ($userFamilyMember["role"] === "member") {
+    echo "You do not have permission to promote members.";
+    http_response_code(403);
+    exit();
+}
+
+$userToPromote = $db->query(
+    sprintf(
+        "SELECT id, family_id FROM %s WHERE id = %d",
+        Db::user_table,
+        $_PATCH["id"]
+    )
+)->fetch_assoc();
+
+if (!$userToPromote) {
+    echo "Failed to find user.";
+    http_response_code(500);
+    exit();
+}
+
+if ($userToPromote["family_id"] !== $user["family_id"]) {
+    echo "User is not part of your family.";
+    http_response_code(403);
+    exit();
+}
+
+$userToPromoteFamilyMember = $db->query(
+    sprintf(
+        "SELECT role FROM %s WHERE user_id = %d",
+        Db::family_member_table,
+        $userToPromote["id"]
+    )
+)->fetch_assoc();
+
+if (!$userToPromoteFamilyMember) {
+    echo "Failed to find user in family.";
+    http_response_code(500);
+    exit();
+}
+
+if ($userToPromoteFamilyMember["role"] === "admin") {
+    echo "User is already an admin.";
+    http_response_code(403);
+    exit();
+}
+
+$updateResult = $db->query(
+    sprintf(
+        "UPDATE %s SET role = 'admin' WHERE user_id = %d",
+        Db::family_member_table,
+        $userToPromote["id"]
+    )
+);
+
+if (!$updateResult) {
+    echo "Failed to promote user.";
+    http_response_code(500);
+    exit();
+}
+
+$family = $db->getFullFamily($user["family_id"]);
+
+if (!$family) {
+    echo "Failed to find family.";
+    http_response_code(500);
+    exit();
+}
+
+echo json_encode($family, JSON_NUMERIC_CHECK);
