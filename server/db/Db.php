@@ -8,6 +8,7 @@ class Db
     private mysqli $db;
 
     public const family_table = "family";
+    public const family_member_table = "family_member";
     public const todo_table = "todo";
     public const user_table = "user";
 

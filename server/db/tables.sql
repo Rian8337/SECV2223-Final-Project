@@ -23,6 +23,17 @@ CREATE TABLE IF NOT EXISTS `user` (
     UNIQUE INDEX `session_id_UNIQUE_idx` (`session_id` ASC)
 ) ENGINE = InnoDB;
 
+-- Create family_member table
+CREATE TABLE IF NOT EXISTS `family_member` (
+    `user_id` INT NOT NULL,
+    `family_id` INT NOT NULL,
+    `role` ENUM('owner', 'admin', 'member') DEFAULT 'member',
+    FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`family_id`) REFERENCES `family`(`id`) ON DELETE CASCADE,
+    UNIQUE INDEX `user_id_UNIQUE_idx` (`user_id` ASC),
+    INDEX `family_id_idx` (`family_id` ASC)
+) ENGINE = InnoDB;
+
 -- Create todo table
 CREATE TABLE IF NOT EXISTS `todo` (
     `id` INT NOT NULL AUTO_INCREMENT,
