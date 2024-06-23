@@ -66,7 +66,7 @@ if (!$userFamilyMember) {
     exit();
 }
 
-if ($userFamilyMember["role"] === "member") {
+if ($userFamilyMember["role"] !== "owner") {
     echo "You do not have permission to demote members.";
     http_response_code(403);
     exit();
@@ -109,13 +109,6 @@ if (!$toDemoteFamilyMember) {
 
 if ($toDemoteFamilyMember["role"] === "owner") {
     echo "You cannot demote the owner.";
-    http_response_code(403);
-    exit();
-}
-
-// Ensure admins cannot demote other admins
-if ($userFamilyMember["role"] === "admin" && $toDemoteFamilyMember["role"] === "admin") {
-    echo "You cannot demote other admins.";
     http_response_code(403);
     exit();
 }
