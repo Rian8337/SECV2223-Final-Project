@@ -2,6 +2,7 @@ import { FC } from "react";
 import { TodoContextProvider } from "./TodoContext";
 import { ThemeContextProvider } from "./ThemeContext";
 import { UserContextProvider } from "./UserContext";
+import { FamilyContextProvider } from "./FamilyContext";
 
 const compose =
     (...components: FC<Record<string, unknown>>[]) =>
@@ -12,6 +13,7 @@ const compose =
         );
 
 export const Providers = compose(
+    FamilyContextProvider,
     TodoContextProvider,
     ThemeContextProvider,
     UserContextProvider

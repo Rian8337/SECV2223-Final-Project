@@ -1,0 +1,49 @@
+.add-family-form {
+    display: flex;
+    font-size: 1.7rem;
+    justify-content: center;
+    margin: 15px 0;
+    padding: 0.8rem;
+    width: 100%;
+}
+
+.add-family-form input {
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    border-top-left-radius: 17px;
+    border-bottom-left-radius: 17px;
+    max-width: 500px;
+    transition: background-color 200ms ease-in-out;
+    width: 100%;
+}
+
+.add-family-form button {
+    padding: 10px;
+    font-size: 17px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    min-width: 100px;
+}
+
+.add-family-form .error {
+    color: red;
+    font-size: 0.75em;
+    font-weight: bold;
+}
+
+/* Responsive design */
+
+@media only screen and (max-width: 400px) {
+    .add-family-form {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .add-family-form button {
+        border-radius: 15px;
+        margin-top: 15px;
+        width: 50%;
+    }
+}

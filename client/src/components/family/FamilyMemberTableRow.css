@@ -1,0 +1,11 @@
+.family-member-table td {
+    padding: 0.2em 0.4em;
+}
+
+/* Responsive design */
+@media only screen and (max-width: 400px) {
+    .family-member-table button {
+        padding: 0.4em 0.65em;
+        font-size: 0.75em;
+    }
+}
