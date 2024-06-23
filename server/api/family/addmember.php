@@ -5,24 +5,14 @@ require_once('../../db/Db.php');
 require_once("../../core/POSTOnly.php");
 require_once("../../core/CheckCookie.php");
 
-if (!isset($_POST["id"])) {
-    echo "Please enter a user ID.";
+if (!isset($_POST["email"])) {
+    echo "Please enter an email.";
     http_response_code(400);
     exit();
 }
 
-// Ensure the supplied ID can be converted to an integer
-if (!is_numeric($_POST["id"])) {
-    echo "Invalid user ID.";
-    http_response_code(400);
-    exit();
-}
-
-// Convert ID to integer
-$_POST["id"] = intval($_POST["id"]);
-
-if ($_POST["id"] < 1) {
-    echo "Invalid user ID.";
+if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+    echo "Invalid email.";
     http_response_code(400);
     exit();
 }
@@ -74,14 +64,14 @@ if ($userFamilyMember["role"] === "member") {
 
 $userToAdd = $db->query(
     sprintf(
-        "SELECT id, family_id FROM %s WHERE id = %d",
+        "SELECT id, family_id FROM %s WHERE email = '%s'",
         Db::user_table,
-        $_POST["id"]
+        $_POST["email"]
     )
 )->fetch_assoc();
 
 if (!$userToAdd) {
-    echo "Failed to find user.";
+    echo "User not found.";
     http_response_code(500);
     exit();
 }
