@@ -2,7 +2,6 @@ import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { FamilyContext } from "../../hooks/FamilyContext";
 import FamilyMemberTableRow from "./FamilyMemberTableRow";
-import "./FamilyMemberTable.css";
 
 export default function FamilyMemberTable(
     props: Readonly<{
@@ -22,7 +21,7 @@ export default function FamilyMemberTable(
     }
 
     return (
-        <table className={`family-member-table ${themeCtx.theme}`}>
+        <table className={themeCtx.theme}>
             <thead>
                 <tr>
                     <th>Name</th>

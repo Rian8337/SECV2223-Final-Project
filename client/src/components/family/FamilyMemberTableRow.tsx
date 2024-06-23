@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { FamilyMember } from "../../model/FamilyMember";
 import FamilyMemberTableActionRow from "./FamilyMemberTableActionRow";
-import "./FamilyMemberTableRow.css";
 
 export default function FamilyMemberTableRow(
     props: Readonly<{

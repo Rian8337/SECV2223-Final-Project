@@ -5,7 +5,6 @@ import { FamilyContext } from "../../hooks/FamilyContext";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { UserContext } from "../../hooks/UserContext";
 import FamilyService from "../../infrastructure/family";
-import "./FamilyMemberTableActionRow.css";
 
 export default function FamilyMemberTableActionRow(
     props: Readonly<{
