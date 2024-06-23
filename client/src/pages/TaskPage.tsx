@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import PageWrapper from "../components/PageWrapper";
 import TodoList from "../components/tasks/TodoList";
 import { TodoContext } from "../hooks/TodoContext";
 import TodoService from "../infrastructure/todo";
@@ -25,10 +24,10 @@ export default function TaskPage() {
     }, [todoCtx]);
 
     return (
-        <PageWrapper>
+        <>
             <h2>Tasks</h2>
 
             {error ? <p className="task-page-error">{error}</p> : <TodoList />}
-        </PageWrapper>
+        </>
     );
 }
