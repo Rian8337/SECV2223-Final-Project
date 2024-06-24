@@ -33,6 +33,7 @@ export interface TodoApi {
      * @param todoId The ID of the todo to edit.
      * @param title The new title of the todo, if any.
      * @param description The new description of the todo, if any.
+     * @param completed The new completion status of the todo, if any.
      * @param signal The abort signal if needed.
      * @returns A promise that resolves to the edited todo.
      */
@@ -40,6 +41,7 @@ export interface TodoApi {
         todoId: number,
         title?: string,
         description?: string,
+        completed?: boolean,
         signal?: AbortSignal
     ): Promise<Todo>;
 

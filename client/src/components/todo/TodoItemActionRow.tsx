@@ -1,17 +1,39 @@
-import { useContext } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
-import { Todo } from "../../model/Todo";
 
-export default function TodoItemActionRow(props: { todo: Todo }) {
+export default function TodoItemActionRow(props: {
+    isEditing: boolean;
+    setIsEditing: Dispatch<SetStateAction<boolean>>;
+    editTodo: () => unknown;
+    deleteTodo: () => unknown;
+}) {
+    const { isEditing, setIsEditing, editTodo, deleteTodo } = props;
     const themeCtx = useContext(ThemeContext);
 
     return (
         <div className="action-row">
-            <button className={`${themeCtx.theme}-button action-button`}>
-                Edit
+            <button
+                type="button"
+                className={`${themeCtx.theme}-button action-button`}
+                onClick={() => {
+                    if (isEditing) {
+                        editTodo();
+                    } else {
+                        setIsEditing(true);
+                    }
+                }}
+            >
+                {isEditing ? "Save" : "Edit"}
             </button>
 
-            <button className={`${themeCtx.theme}-button action-button`}>
+            <button
+                type="button"
+                className={`${themeCtx.theme}-button action-button`}
+                disabled={isEditing}
+                onClick={() => {
+                    deleteTodo();
+                }}
+            >
                 Delete
             </button>
         </div>

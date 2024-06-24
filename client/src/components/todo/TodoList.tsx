@@ -20,8 +20,8 @@ export default function TodoList() {
                     <tr>
                         <th>Todo</th>
                         <th>Description</th>
-                        <th>Creation Date</th>
-                        <th>Completed</th>
+                        <th>Created At</th>
+                        <th>Done</th>
                         <th>Created By</th>
                         <th>Actions</th>
                     </tr>

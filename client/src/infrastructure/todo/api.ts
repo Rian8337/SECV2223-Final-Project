@@ -53,7 +53,7 @@ export default {
         }
     },
 
-    async editTodo(todoId, title, description, signal) {
+    async editTodo(todoId, title, description, completed, signal) {
         const url = new URL("edittodo.php", baseUrl);
         const searchParams = new URLSearchParams();
 
@@ -67,6 +67,10 @@ export default {
             searchParams.set("description", description);
         }
 
+        if (completed !== undefined) {
+            searchParams.set("completed", completed ? "1" : "0");
+        }
+
         const response = await fetch(url, {
             method: "PATCH",
             credentials: "include",
@@ -76,6 +80,8 @@ export default {
             body: searchParams,
             signal: signal,
         });
+
+        // console.log(await response.text());
 
         if (!response.ok) {
             throw new Error(await response.text());

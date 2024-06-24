@@ -27,9 +27,10 @@ export class TodoService implements TodoApi {
         todoId: number,
         title?: string,
         description?: string,
+        completed?: boolean,
         signal?: AbortSignal
     ): Promise<Todo> {
-        return this.api.editTodo(todoId, title, description, signal);
+        return this.api.editTodo(todoId, title, description, completed, signal);
     }
 
     getTodos(searchedTitle?: string, signal?: AbortSignal): Promise<Todo[]> {
