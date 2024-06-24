@@ -31,7 +31,7 @@ if (!$todo) {
 // Check if user is authorized to delete todo
 $user = $db->query(
     sprintf(
-        "SELECT id FROM %s WHERE session_id = '%s'",
+        "SELECT id, family_id FROM %s WHERE session_id = '%s'",
         Db::user_table,
         $db->escapeString($_COOKIE['sessionId'])
     )
