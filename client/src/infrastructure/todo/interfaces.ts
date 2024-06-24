@@ -48,9 +48,14 @@ export interface TodoApi {
     /**
      * Gets all the todos in the currently signed in user's family.
      *
-     * @param searchedTitle The title to search, if any.
+     * @param title The title to search, if any.
+     * @param page The page number to get. Defaults to 1.
      * @param signal The abort signal if needed.
      * @returns A promise that resolves to the list of todos.
      */
-    getTodos(searchedTitle?: string, signal?: AbortSignal): Promise<Todo[]>;
+    getTodos(
+        title?: string,
+        page?: number,
+        signal?: AbortSignal
+    ): Promise<Todo[]>;
 }

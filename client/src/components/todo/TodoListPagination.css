@@ -1,0 +1,8 @@
+.todo-list-pagination {
+    display: flex;
+    justify-content: space-evenly;
+    width: 75%;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    align-items: center;
+}

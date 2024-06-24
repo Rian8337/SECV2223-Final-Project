@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { TodoContext } from "../../hooks/TodoContext";
 import TodoItem from "./TodoItem";
 import { ThemeContext } from "../../hooks/ThemeContext";
-import SectionHeader from "../SectionHeader";
 
 export default function TodoList() {
     const themeCtx = useContext(ThemeContext);
@@ -14,9 +13,7 @@ export default function TodoList() {
 
     return (
         <>
-            <SectionHeader>Todo List</SectionHeader>
-
-            <table className={themeCtx.theme} style={{ marginBottom: "1em" }}>
+            <table className={themeCtx.theme}>
                 <thead>
                     <tr>
                         <th>Todo</th>

@@ -88,12 +88,15 @@ export default {
         return response.json() as Promise<Todo>;
     },
 
-    async getTodos(searchedTitle, signal) {
+    async getTodos(title, page, signal) {
         const url = new URL("gettodos.php", baseUrl);
-        const searchParams = new URLSearchParams();
 
-        if (searchedTitle) {
-            searchParams.set("searchedTitle", searchedTitle);
+        if (title) {
+            url.searchParams.set("title", title);
+        }
+
+        if (page) {
+            url.searchParams.set("page", page.toString());
         }
 
         const response = await fetch(url, {

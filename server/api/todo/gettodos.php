@@ -29,6 +29,14 @@ if (!isset($user["family_id"])) {
     exit();
 }
 
+$page = isset($_GET["page"]) ? intval($_GET["page"]) - 1 : 0;
+
+if ($page < 0) {
+    echo "Invalid page number.";
+    http_response_code(400);
+    exit();
+}
+
 $query = sprintf(
     "SELECT id, title, description, created_at, completed, user_id FROM %s WHERE family_id = %d",
     Db::todo_table,
@@ -37,11 +45,10 @@ $query = sprintf(
 
 // If searched title is set, filter by title.
 if (isset($_GET["title"])) {
-    $query .= sprintf(" AND title LIKE '%s%'", $db->escapeString($_GET["title"]));
+    $query .= sprintf(" AND title LIKE '%s%%'", $db->escapeString($_GET["title"]));
 }
 
-$page = isset($_GET["page"]) ? intval($_GET["page"]) : 0;
-$query .= " ORDER BY created_at DESC LIMIT " . $page * 20 . ", 10";
+$query .= " ORDER BY created_at DESC LIMIT " . $page * 10 . ", 10";
 
 $todos = $db->query($query)->fetch_all(MYSQLI_ASSOC);
 

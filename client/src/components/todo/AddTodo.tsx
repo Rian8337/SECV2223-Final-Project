@@ -34,6 +34,10 @@ export default function AddTodo() {
                 const newTodos = todoCtx.todos.slice();
                 newTodos.unshift(todo);
 
+                while (newTodos.length > 10) {
+                    newTodos.pop();
+                }
+
                 todoCtx.setTodos(newTodos);
 
                 if (todoTitleRef.current) {
