@@ -7,6 +7,7 @@ import "./FamilyMemberList.css";
 import SectionHeader from "../SectionHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 export default function FamilyMemberList() {
     const userCtx = useContext(UserContext);
@@ -27,11 +28,14 @@ export default function FamilyMemberList() {
             <SectionHeader>Family Members</SectionHeader>
 
             {error ? (
-                <p className="family-members-error">
-                    <span>
-                        <FontAwesomeIcon icon={faXmark} /> {error}
-                    </span>
-                </p>
+                <motion.p
+                    className="family-members-error"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    transition={{ duration: 0.25 }}
+                >
+                    <FontAwesomeIcon icon={faXmark} /> {error}
+                </motion.p>
             ) : null}
 
             <FamilyMemberTable
