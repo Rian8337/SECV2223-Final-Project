@@ -1,5 +1,8 @@
 /* Google Font (Quick Sand) */
 @import url(https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap);
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 * {
     margin: 0;
@@ -47,6 +50,10 @@ button:hover {
 }
 
 /* Input themes */
+input {
+    font-family: "Work Sans", sans-serif;
+}
+
 input.standard-input {
     background-color: #181a1a;
     color: rgb(247, 226, 223);
