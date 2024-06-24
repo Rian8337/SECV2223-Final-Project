@@ -8,7 +8,9 @@ export default function TodoList() {
     const todoCtx = useContext(TodoContext);
 
     if (todoCtx.todos.length === 0) {
-        return <p>No todos yet.</p>;
+        return (
+            <p>No todos yet. Great job! Unless... you put the wrong filters.</p>
+        );
     }
 
     return (
