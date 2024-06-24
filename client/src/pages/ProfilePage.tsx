@@ -6,6 +6,7 @@ import LogoutButton from "../components/profile/LogoutButton";
 import EditUserDetails from "../components/profile/EditUserDetails";
 import ChangePassword from "../components/profile/ChangePassword";
 import "./ProfilePage.css";
+import SectionHeader from "../components/SectionHeader";
 
 export default function ProfilePage() {
     const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function ProfilePage() {
 
     return (
         <PageWrapper>
-            <h2>Profile</h2>
+            <SectionHeader>Profile</SectionHeader>
 
             <br />
 
