@@ -144,7 +144,7 @@ export default function FamilyMemberTableActionRow(
             <button
                 key="leave"
                 type="button"
-                className={`${themeCtx.theme}-button action-button`}
+                className={`${themeCtx.theme}-button`}
                 disabled={isSubmitting}
                 onClick={() => {
                     removeMember(member);
@@ -160,7 +160,7 @@ export default function FamilyMemberTableActionRow(
             <button
                 key="make-owner"
                 type="button"
-                className={`${themeCtx.theme}-button action-button`}
+                className={`${themeCtx.theme}-button`}
                 disabled={isSubmitting}
                 onClick={() => {
                     moveOwnership(member);
@@ -176,7 +176,7 @@ export default function FamilyMemberTableActionRow(
             <button
                 key="promote"
                 type="button"
-                className={`${themeCtx.theme}-button action-button`}
+                className={`${themeCtx.theme}-button`}
                 disabled={isSubmitting}
                 onClick={() => {
                     promoteMember(member.id);
@@ -192,7 +192,7 @@ export default function FamilyMemberTableActionRow(
             <button
                 key="demote"
                 type="button"
-                className={`${themeCtx.theme}-button action-button`}
+                className={`${themeCtx.theme}-button`}
                 disabled={isSubmitting}
                 onClick={() => {
                     demoteMember(member.id);

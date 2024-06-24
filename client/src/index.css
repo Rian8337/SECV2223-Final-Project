@@ -154,6 +154,7 @@ a {
 table {
     width: 90%;
     margin-top: 1em;
+    overflow-wrap: anywhere;
 }
 
 table,
@@ -183,20 +184,28 @@ table td {
 
 table .action-row {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-table .action-button {
+table button {
     padding: 0.5em 0.75em;
+    margin: 0.25em;
     font-size: 1em;
     border-radius: 0.5em;
 }
 
 /* Responsive design */
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
+    table td {
+        padding: 0.1em 0.2em;
+    }
+
     table button {
-        padding: 0.4em 0.65em;
+        padding: 0.25em 1em;
+        margin: 0.1em;
         font-size: 0.75em;
+        border-radius: 0.25em;
     }
 }
