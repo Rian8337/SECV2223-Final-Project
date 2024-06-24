@@ -27,7 +27,10 @@ export default function AddTodo() {
 
         TodoService.addTodo(title, description)
             .then((todo) => {
-                todoCtx.setTodos(todoCtx.todos.concat(todo));
+                const newTodos = todoCtx.todos.slice();
+                newTodos.unshift(todo);
+
+                todoCtx.setTodos(newTodos);
 
                 if (todoTitleRef.current) {
                     todoTitleRef.current.value = "";
