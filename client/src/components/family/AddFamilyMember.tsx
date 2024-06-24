@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { FamilyContext } from "../../hooks/FamilyContext";
 import FamilyService from "../../infrastructure/family";
+import VerticalForm from "../form/VerticalForm";
+import VerticalFormError from "../form/VerticalFormError";
 
 export default function AddFamilyMember() {
     const themeCtx = useContext(ThemeContext);
@@ -41,7 +43,7 @@ export default function AddFamilyMember() {
         <>
             <h2>Add Family Member</h2>
 
-            <form className="vertical-form" onSubmit={addMember}>
+            <VerticalForm onSubmit={addMember}>
                 <input
                     type="email"
                     name="email"
@@ -51,7 +53,7 @@ export default function AddFamilyMember() {
                     disabled={isAdding}
                 />
 
-                {error ? <p className="error">{error}</p> : null}
+                <VerticalFormError error={error} />
 
                 <button
                     type="submit"
@@ -60,7 +62,7 @@ export default function AddFamilyMember() {
                 >
                     Add Member
                 </button>
-            </form>
+            </VerticalForm>
         </>
     );
 }

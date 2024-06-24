@@ -1,6 +1,9 @@
 import { useContext, useRef, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import UserService from "../../infrastructure/user";
+import VerticalForm from "../form/VerticalForm";
+import VerticalFormInputContainer from "../form/VerticalFormInputContainer";
+import VerticalFormError from "../form/VerticalFormError";
 
 export default function ChangePassword() {
     const themeCtx = useContext(ThemeContext);
@@ -51,8 +54,8 @@ export default function ChangePassword() {
         <div>
             <h2 style={{ textAlign: "center" }}>Change Password</h2>
 
-            <form className="vertical-form" onSubmit={changePassword}>
-                <span className="input-container">
+            <VerticalForm onSubmit={changePassword}>
+                <VerticalFormInputContainer>
                     <label htmlFor="password">Password</label>
 
                     <input
@@ -66,9 +69,9 @@ export default function ChangePassword() {
                         onChange={validatePassword}
                         disabled={isSubmitting}
                     />
-                </span>
+                </VerticalFormInputContainer>
 
-                <span className="input-container">
+                <VerticalFormInputContainer>
                     <label htmlFor="confirm-password">Confirm Password</label>
 
                     <input
@@ -82,9 +85,9 @@ export default function ChangePassword() {
                         onChange={validatePassword}
                         disabled={isSubmitting}
                     />
-                </span>
+                </VerticalFormInputContainer>
 
-                {error ? <p className="error">{error}</p> : null}
+                <VerticalFormError error={error} />
 
                 <button
                     type="submit"
@@ -93,7 +96,7 @@ export default function ChangePassword() {
                 >
                     Change Password
                 </button>
-            </form>
+            </VerticalForm>
         </div>
     );
 }

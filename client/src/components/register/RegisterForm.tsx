@@ -3,6 +3,9 @@ import { ThemeContext } from "../../hooks/ThemeContext";
 import { UserContext } from "../../hooks/UserContext";
 import UserService from "../../infrastructure/user";
 import { useNavigate } from "react-router-dom";
+import VerticalForm from "../form/VerticalForm";
+import VerticalFormError from "../form/VerticalFormError";
+import VerticalFormSection from "../form/VerticalFormSection";
 
 export default function RegisterForm() {
     const navigate = useNavigate();
@@ -10,7 +13,7 @@ export default function RegisterForm() {
     const themeCtx = useContext(ThemeContext);
 
     const [isRegistering, setIsRegistering] = useState(false);
-    const [error, setError] = useState<string | null>();
+    const [error, setError] = useState<string | null>(null);
 
     const passwordRef = useRef<HTMLInputElement>(null);
     const confirmPasswordRef = useRef<HTMLInputElement>(null);
@@ -53,7 +56,7 @@ export default function RegisterForm() {
     }
 
     return (
-        <form className="vertical-form" onSubmit={register}>
+        <VerticalForm onSubmit={register}>
             <input
                 name="name"
                 type="text"
@@ -98,9 +101,9 @@ export default function RegisterForm() {
                 disabled={isRegistering}
             />
 
-            {error !== null ? <p className="error">{error}</p> : null}
+            <VerticalFormError error={error} />
 
-            <div className="vertical-form-section">
+            <VerticalFormSection>
                 <button
                     className={`${themeCtx.theme}-button`}
                     type="submit"
@@ -119,7 +122,7 @@ export default function RegisterForm() {
                 >
                     Have an account? Login
                 </button>
-            </div>
-        </form>
+            </VerticalFormSection>
+        </VerticalForm>
     );
 }

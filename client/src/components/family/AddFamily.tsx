@@ -4,6 +4,7 @@ import { ThemeContext } from "../../hooks/ThemeContext";
 import FamilyService from "../../infrastructure/family";
 import { FamilyContext } from "../../hooks/FamilyContext";
 import "./AddFamily.css";
+import { motion } from "framer-motion";
 
 export default function AddFamily() {
     const themeCtx = useContext(ThemeContext);
@@ -72,7 +73,16 @@ export default function AddFamily() {
                     maxLength={255}
                 />
 
-                {error ? <p className="error">{error}</p> : null}
+                {error ? (
+                    <motion.p
+                        className="error"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        transition={{ duration: 0.25 }}
+                    >
+                        {error}
+                    </motion.p>
+                ) : null}
 
                 <button
                     className={`${themeCtx.theme}-button`}

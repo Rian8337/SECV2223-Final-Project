@@ -3,6 +3,8 @@ import { ThemeContext } from "../../hooks/ThemeContext";
 import UserService from "../../infrastructure/user";
 import { UserContext } from "../../hooks/UserContext";
 import { FamilyContext } from "../../hooks/FamilyContext";
+import VerticalForm from "../form/VerticalForm";
+import VerticalFormError from "../form/VerticalFormError";
 
 export default function LogoutButton() {
     const themeCtx = useContext(ThemeContext);
@@ -40,8 +42,8 @@ export default function LogoutButton() {
     }
 
     return (
-        <form className="vertical-form" onSubmit={logout}>
-            {error ? <p className="error">{error}</p> : null}
+        <VerticalForm onSubmit={logout}>
+            <VerticalFormError error={error} />
 
             <button
                 type="submit"
@@ -50,6 +52,6 @@ export default function LogoutButton() {
             >
                 Logout
             </button>
-        </form>
+        </VerticalForm>
     );
 }

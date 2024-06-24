@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { FamilyContext } from "../../hooks/FamilyContext";
 import FamilyService from "../../infrastructure/family";
+import VerticalForm from "../form/VerticalForm";
+import VerticalFormError from "../form/VerticalFormError";
 
 export default function EditFamilyDetails() {
     const themeCtx = useContext(ThemeContext);
@@ -45,7 +47,7 @@ export default function EditFamilyDetails() {
         <>
             <h2>Edit Family Details</h2>
 
-            <form className="vertical-form" onSubmit={editFamilyDetails}>
+            <VerticalForm onSubmit={editFamilyDetails}>
                 <input
                     name="name"
                     type="text"
@@ -59,7 +61,7 @@ export default function EditFamilyDetails() {
                     disabled={isSubmitting}
                 />
 
-                {error ? <p className="error">{error}</p> : null}
+                <VerticalFormError error={error} />
 
                 <button
                     type="submit"
@@ -68,7 +70,7 @@ export default function EditFamilyDetails() {
                 >
                     {isSubmitting ? "Saving..." : "Save"}
                 </button>
-            </form>
+            </VerticalForm>
         </>
     );
 }

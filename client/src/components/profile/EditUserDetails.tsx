@@ -2,6 +2,10 @@ import { useState, useRef, useContext } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import { UserContext } from "../../hooks/UserContext";
 import UserService from "../../infrastructure/user";
+import VerticalForm from "../form/VerticalForm";
+import VerticalFormInputContainer from "../form/VerticalFormInputContainer";
+import VerticalFormError from "../form/VerticalFormError";
+import VerticalFormSection from "../form/VerticalFormSection";
 
 export default function EditUserDetails() {
     const themeCtx = useContext(ThemeContext);
@@ -72,40 +76,40 @@ export default function EditUserDetails() {
         <div>
             <h2 style={{ textAlign: "center" }}>Edit Details</h2>
 
-            <form className="vertical-form" onSubmit={editUser}>
-                <span className="input-container">
+            <VerticalForm onSubmit={editUser}>
+                <VerticalFormInputContainer>
                     <label htmlFor="email">Email</label>
 
                     <input
                         type="email"
-                        className={`${themeCtx.theme}-input`}
                         name="email"
+                        className={`${themeCtx.theme}-input`}
                         placeholder="Enter email..."
                         required
                         defaultValue={userCtx.value.email}
                         disabled={!isEditing || isSubmitting}
                         ref={emailInputRef}
                     />
-                </span>
+                </VerticalFormInputContainer>
 
-                <span className="input-container">
+                <VerticalFormInputContainer>
                     <label htmlFor="name">Name</label>
 
                     <input
                         type="text"
-                        className={`${themeCtx.theme}-input`}
                         name="name"
+                        className={`${themeCtx.theme}-input`}
                         placeholder="Enter name..."
                         required
                         defaultValue={userCtx.value.name}
                         disabled={!isEditing || isSubmitting}
                         ref={nameInputRef}
                     />
-                </span>
+                </VerticalFormInputContainer>
 
-                {error ? <p className="error">{error}</p> : null}
+                <VerticalFormError error={error} />
 
-                <div className="vertical-form-section">
+                <VerticalFormSection>
                     <button
                         type={isEditing ? "submit" : "button"}
                         className={`${themeCtx.theme}-button`}
@@ -131,8 +135,8 @@ export default function EditUserDetails() {
                             Cancel
                         </button>
                     ) : null}
-                </div>
-            </form>
+                </VerticalFormSection>
+            </VerticalForm>
         </div>
     );
 }

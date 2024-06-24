@@ -3,6 +3,9 @@ import { ThemeContext } from "../../hooks/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../hooks/UserContext";
 import UserService from "../../infrastructure/user";
+import VerticalForm from "../form/VerticalForm";
+import VerticalFormError from "../form/VerticalFormError";
+import VerticalFormSection from "../form/VerticalFormSection";
 
 export default function LoginForm() {
     const navigate = useNavigate();
@@ -44,7 +47,7 @@ export default function LoginForm() {
     }
 
     return (
-        <form className="vertical-form" onSubmit={login}>
+        <VerticalForm onSubmit={login}>
             <input
                 name="email"
                 type="email"
@@ -64,9 +67,9 @@ export default function LoginForm() {
                 disabled={isLoggingIn}
             />
 
-            {error !== null ? <p className="error">{error}</p> : null}
+            <VerticalFormError error={error} />
 
-            <div className="vertical-form-section">
+            <VerticalFormSection>
                 <button className={`${themeCtx.theme}-button`} type="submit">
                     {isLoggingIn ? "Logging in..." : "Login"}
                 </button>
@@ -81,7 +84,7 @@ export default function LoginForm() {
                 >
                     Don&apos;t have an account? Register an account
                 </button>
-            </div>
-        </form>
+            </VerticalFormSection>
+        </VerticalForm>
     );
 }

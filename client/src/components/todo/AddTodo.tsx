@@ -2,6 +2,8 @@ import { useContext, useRef, useState } from "react";
 import { TodoContext } from "../../hooks/TodoContext";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import TodoService from "../../infrastructure/todo";
+import VerticalForm from "../form/VerticalForm";
+import VerticalFormError from "../form/VerticalFormError";
 
 export default function AddTodo() {
     const todoCtx = useContext(TodoContext);
@@ -58,7 +60,7 @@ export default function AddTodo() {
         <>
             <h2>Add Todo</h2>
 
-            <form className="vertical-form" onSubmit={addTodo}>
+            <VerticalForm onSubmit={addTodo}>
                 <input
                     className={`${themeCtx.theme}-input`}
                     type="text"
@@ -79,7 +81,7 @@ export default function AddTodo() {
                     ref={todoDescriptionRef}
                 />
 
-                {error ? <p className="error">{error}</p> : null}
+                <VerticalFormError error={error} />
 
                 <button
                     className={`${themeCtx.theme}-button`}
@@ -88,7 +90,7 @@ export default function AddTodo() {
                 >
                     Add Todo
                 </button>
-            </form>
+            </VerticalForm>
         </>
     );
 }

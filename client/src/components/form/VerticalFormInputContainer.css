@@ -1,0 +1,9 @@
+.vertical-form .input-container {
+    display: flex;
+    align-items: center;
+}
+
+.vertical-form .input-container label {
+    font-size: 0.75em;
+    margin-right: 0.75em;
+}
