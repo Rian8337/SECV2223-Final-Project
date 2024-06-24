@@ -33,7 +33,7 @@ export default {
         const url = new URL("login.php", baseUrl);
 
         const response = await fetch(url, {
-            method: "PUT",
+            method: "POST",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
