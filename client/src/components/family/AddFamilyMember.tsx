@@ -5,6 +5,7 @@ import FamilyService from "../../infrastructure/family";
 import VerticalForm from "../form/VerticalForm";
 import VerticalFormError from "../form/VerticalFormError";
 import SectionHeader from "../SectionHeader";
+import VerticalFormInputContainer from "../form/VerticalFormInputContainer";
 
 export default function AddFamilyMember() {
     const themeCtx = useContext(ThemeContext);
@@ -45,14 +46,18 @@ export default function AddFamilyMember() {
             <SectionHeader>Add Family Member</SectionHeader>
 
             <VerticalForm onSubmit={addMember}>
-                <input
-                    type="email"
-                    name="email"
-                    className={`${themeCtx.theme}-input`}
-                    placeholder="Enter email..."
-                    required
-                    disabled={isAdding}
-                />
+                <VerticalFormInputContainer>
+                    <label htmlFor="email">Email</label>
+
+                    <input
+                        type="email"
+                        name="email"
+                        className={`${themeCtx.theme}-input`}
+                        placeholder="Enter email..."
+                        required
+                        disabled={isAdding}
+                    />
+                </VerticalFormInputContainer>
 
                 <VerticalFormError error={error} />
 

@@ -78,7 +78,7 @@ export default function EditUserDetails() {
             <SectionHeader>Edit Details</SectionHeader>
 
             <VerticalForm onSubmit={editUser}>
-                <VerticalFormInputContainer>
+                <VerticalFormInputContainer halfSize>
                     <label htmlFor="email">Email</label>
 
                     <input
@@ -90,11 +90,10 @@ export default function EditUserDetails() {
                         defaultValue={userCtx.value.email}
                         disabled={!isEditing || isSubmitting}
                         ref={emailInputRef}
-                        size={50}
                     />
                 </VerticalFormInputContainer>
 
-                <VerticalFormInputContainer>
+                <VerticalFormInputContainer halfSize>
                     <label htmlFor="name">Name</label>
 
                     <input
@@ -106,7 +105,6 @@ export default function EditUserDetails() {
                         defaultValue={userCtx.value.name}
                         disabled={!isEditing || isSubmitting}
                         ref={nameInputRef}
-                        size={50}
                     />
                 </VerticalFormInputContainer>
 

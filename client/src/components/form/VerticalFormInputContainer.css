@@ -1,9 +1,17 @@
 .vertical-form .input-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1.5fr 3fr;
     align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .vertical-form .input-container label {
     font-size: 0.75em;
     margin-right: 0.75em;
+    text-align: right;
+}
+
+.vertical-form .input-container.half-size {
+    grid-template-columns: 1fr 3fr;
 }

@@ -5,6 +5,7 @@ import TodoService from "../../infrastructure/todo";
 import VerticalForm from "../form/VerticalForm";
 import VerticalFormError from "../form/VerticalFormError";
 import SectionHeader from "../SectionHeader";
+import VerticalFormInputContainer from "../form/VerticalFormInputContainer";
 
 export default function AddTodo() {
     const todoCtx = useContext(TodoContext);
@@ -62,25 +63,33 @@ export default function AddTodo() {
             <SectionHeader>Add Todo</SectionHeader>
 
             <VerticalForm onSubmit={addTodo}>
-                <input
-                    className={`${themeCtx.theme}-input`}
-                    type="text"
-                    name="title"
-                    placeholder="Enter title..."
-                    required
-                    disabled={isSubmitting}
-                    ref={todoTitleRef}
-                />
+                <VerticalFormInputContainer>
+                    <label htmlFor="title">Title</label>
 
-                <input
-                    className={`${themeCtx.theme}-input`}
-                    type="text"
-                    name="description"
-                    placeholder="Enter description..."
-                    required
-                    disabled={isSubmitting}
-                    ref={todoDescriptionRef}
-                />
+                    <input
+                        className={`${themeCtx.theme}-input`}
+                        type="text"
+                        name="title"
+                        placeholder="Enter title..."
+                        required
+                        disabled={isSubmitting}
+                        ref={todoTitleRef}
+                    />
+                </VerticalFormInputContainer>
+
+                <VerticalFormInputContainer>
+                    <label htmlFor="description">Description</label>
+
+                    <input
+                        className={`${themeCtx.theme}-input`}
+                        type="text"
+                        name="description"
+                        placeholder="Enter description..."
+                        required
+                        disabled={isSubmitting}
+                        ref={todoDescriptionRef}
+                    />
+                </VerticalFormInputContainer>
 
                 <VerticalFormError error={error} />
 

@@ -5,6 +5,7 @@ import FamilyService from "../../infrastructure/family";
 import VerticalForm from "../form/VerticalForm";
 import VerticalFormError from "../form/VerticalFormError";
 import SectionHeader from "../SectionHeader";
+import VerticalFormInputContainer from "../form/VerticalFormInputContainer";
 
 export default function EditFamilyDetails() {
     const themeCtx = useContext(ThemeContext);
@@ -49,18 +50,22 @@ export default function EditFamilyDetails() {
             <SectionHeader>Edit Family Details</SectionHeader>
 
             <VerticalForm onSubmit={editFamilyDetails}>
-                <input
-                    name="name"
-                    type="text"
-                    className={`${themeCtx.theme}-input`}
-                    placeholder="Enter family name..."
-                    required
-                    autoComplete="name"
-                    defaultValue={familyCtx.value.name}
-                    minLength={3}
-                    maxLength={255}
-                    disabled={isSubmitting}
-                />
+                <VerticalFormInputContainer>
+                    <label htmlFor="name">Name</label>
+
+                    <input
+                        name="name"
+                        type="text"
+                        className={`${themeCtx.theme}-input`}
+                        placeholder="Enter family name..."
+                        required
+                        autoComplete="name"
+                        defaultValue={familyCtx.value.name}
+                        minLength={3}
+                        maxLength={255}
+                        disabled={isSubmitting}
+                    />
+                </VerticalFormInputContainer>
 
                 <VerticalFormError error={error} />
 

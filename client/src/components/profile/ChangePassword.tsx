@@ -56,7 +56,7 @@ export default function ChangePassword() {
             <SectionHeader>Change Password</SectionHeader>
 
             <VerticalForm onSubmit={changePassword}>
-                <VerticalFormInputContainer>
+                <VerticalFormInputContainer halfSize>
                     <label htmlFor="password">Password</label>
 
                     <input
@@ -72,7 +72,7 @@ export default function ChangePassword() {
                     />
                 </VerticalFormInputContainer>
 
-                <VerticalFormInputContainer>
+                <VerticalFormInputContainer halfSize>
                     <label htmlFor="confirm-password">Confirm Password</label>
 
                     <input
