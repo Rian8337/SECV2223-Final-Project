@@ -82,6 +82,21 @@ if (isset($userToAdd["family_id"])) {
     exit();
 }
 
+// Only allow users to add up to 10 members
+$familyMembersCount = $db->query(
+    sprintf(
+        "SELECT COUNT(*) FROM %s WHERE family_id = %d",
+        Db::family_member_table,
+        $user["family_id"]
+    )
+)->field_count;
+
+if ($familyMembersCount >= 10) {
+    echo "You have reached the maximum number of family members.";
+    http_response_code(403);
+    exit();
+}
+
 $updateUserResult = $db->query(
     sprintf(
         "UPDATE %s SET family_id = %d WHERE id = %d",
