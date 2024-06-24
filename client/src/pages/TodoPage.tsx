@@ -12,6 +12,9 @@ import TodoListPagination from "../components/todo/TodoListPagination";
 import { motion } from "framer-motion";
 import SectionHeader from "../components/SectionHeader";
 import TodoSearchBar from "../components/todo/TodoSearchBar";
+import { TodoSearchTitleContext } from "../hooks/TodoSearchTitleContext";
+import { TodoSearchPageContext } from "../hooks/TodoSearchPageContext";
+import { TodoSearchCompletedContext } from "../hooks/TodoSearchCompletedContext";
 
 export default function TodoPage() {
     const navigate = useNavigate();
@@ -20,8 +23,9 @@ export default function TodoPage() {
     const themeCtx = useContext(ThemeContext);
     const todoCtx = useContext(TodoContext);
 
-    const [title, setTitle] = useState("");
-    const [page, setPage] = useState(1);
+    const titleSearchCtx = useContext(TodoSearchTitleContext);
+    const pageSearchCtx = useContext(TodoSearchPageContext);
+    const completedSearchCtx = useContext(TodoSearchCompletedContext);
 
     const [error, setError] = useState<string | null>(null);
     const [isSubmitting, setIsQuerying] = useState(false);
@@ -44,7 +48,12 @@ export default function TodoPage() {
             setIsQuerying(true);
 
             // Get existing todos from the server
-            TodoService.getTodos(title, page)
+            TodoService.getTodos(
+                titleSearchCtx.title,
+                pageSearchCtx.page,
+                completedSearchCtx.completed,
+                controller.signal
+            )
                 .then((data) => {
                     todoCtx.setTodos(data);
                 })
@@ -76,7 +85,12 @@ export default function TodoPage() {
 
         // We only want to run this hook once.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [userCtx.value, page, title]);
+    }, [
+        userCtx.value,
+        titleSearchCtx.title,
+        pageSearchCtx.page,
+        completedSearchCtx.completed,
+    ]);
 
     return (
         <PageWrapper>
@@ -98,20 +112,9 @@ export default function TodoPage() {
             {/* This is specially put here as search bar should come first. */}
             <SectionHeader>Todo List</SectionHeader>
 
-            <TodoSearchBar
-                title={title}
-                setTitle={setTitle}
-                setPage={setPage}
-            />
-
+            <TodoSearchBar />
             <TodoList />
-
-            <TodoListPagination
-                page={page}
-                setPage={setPage}
-                disableNext={todoCtx.todos.length < 10}
-                disabled={isSubmitting}
-            />
+            <TodoListPagination disabled={isSubmitting} />
         </PageWrapper>
     );
 }

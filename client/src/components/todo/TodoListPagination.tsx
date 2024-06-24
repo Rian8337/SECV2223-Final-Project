@@ -1,18 +1,13 @@
-import { Dispatch, SetStateAction, useContext } from "react";
+import { useContext } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import "./TodoListPagination.css";
+import { TodoContext } from "../../hooks/TodoContext";
+import { TodoSearchPageContext } from "../../hooks/TodoSearchPageContext";
 
-interface Props {
-    readonly page: number;
-    readonly setPage: Dispatch<SetStateAction<number>>;
-    readonly disabled: boolean;
-    readonly disableNext: boolean;
-}
-
-export default function TodoListPagination(props: Props) {
-    const { page, setPage, disabled, disableNext } = props;
-
+export default function TodoListPagination(props: { disabled: boolean }) {
     const themeCtx = useContext(ThemeContext);
+    const todoCtx = useContext(TodoContext);
+    const pageCtx = useContext(TodoSearchPageContext);
 
     return (
         <div className="todo-list-pagination">
@@ -20,9 +15,9 @@ export default function TodoListPagination(props: Props) {
                 type="button"
                 className={`${themeCtx.theme}-button`}
                 onClick={() => {
-                    setPage(page - 1);
+                    pageCtx.setPage(pageCtx.page - 1);
                 }}
-                disabled={page <= 1 || disabled}
+                disabled={pageCtx.page <= 1 || props.disabled}
             >
                 Previous
             </button>
@@ -31,15 +26,15 @@ export default function TodoListPagination(props: Props) {
                 className={`${themeCtx.theme}-button`}
                 disabled
             >
-                Page {page}
+                Page {pageCtx.page}
             </button>
             <button
                 type="button"
                 className={`${themeCtx.theme}-button`}
                 onClick={() => {
-                    setPage(page + 1);
+                    pageCtx.setPage(pageCtx.page + 1);
                 }}
-                disabled={disableNext || disabled}
+                disabled={todoCtx.todos.length < 10 || props.disabled}
             >
                 Next
             </button>

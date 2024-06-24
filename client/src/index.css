@@ -99,6 +99,52 @@ input.darker-input:hover {
     background-color: #013141;
 }
 
+/* Select themes */
+select {
+    font-family: "Work Sans", sans-serif;
+}
+
+select.standard {
+    background-color: #181a1a;
+    color: rgb(247, 226, 223);
+}
+
+select.light {
+    background-color: #aeb1b4;
+    color: #1a150e;
+}
+
+select.light::placeholder {
+    color: #1a150e;
+    opacity: 0.7;
+}
+
+select.darker {
+    background-color: #01394c;
+    color: white;
+}
+
+select.darker::placeholder {
+    color: white;
+    opacity: 0.7;
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+select.standard:hover {
+    background-color: rgb(0, 0, 0);
+}
+
+select.light:hover {
+    background-color: #919699;
+}
+
+select.darker:hover {
+    background-color: #013141;
+}
+
 /* Button themes */
 button.standard-button {
     background-color: rgb(247, 226, 223);

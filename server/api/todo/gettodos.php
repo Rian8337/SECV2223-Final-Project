@@ -43,6 +43,11 @@ $query = sprintf(
     $user["family_id"]
 );
 
+// If completed is set, filter by completed.
+if (isset($_GET["completed"])) {
+    $query .= sprintf(" AND completed = %d", intval($_GET["completed"]));
+}
+
 // If searched title is set, filter by title.
 if (isset($_GET["title"])) {
     $query .= sprintf(" AND title LIKE '%s%%'", $db->escapeString($_GET["title"]));

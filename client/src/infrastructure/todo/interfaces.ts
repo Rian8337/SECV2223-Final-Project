@@ -50,12 +50,14 @@ export interface TodoApi {
      *
      * @param title The title to search, if any.
      * @param page The page number to get. Defaults to 1.
+     * @param completed The completion status to filter by, if any.
      * @param signal The abort signal if needed.
      * @returns A promise that resolves to the list of todos.
      */
     getTodos(
-        title?: string,
-        page?: number,
+        title: string,
+        page: number,
+        completed: boolean | null,
         signal?: AbortSignal
     ): Promise<Todo[]>;
 }

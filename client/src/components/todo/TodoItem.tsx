@@ -6,12 +6,14 @@ import { useContext, useRef, useState } from "react";
 import { ThemeContext } from "../../hooks/ThemeContext";
 import TodoService from "../../infrastructure/todo";
 import { TodoContext } from "../../hooks/TodoContext";
+import { TodoSearchCompletedContext } from "../../hooks/TodoSearchCompletedContext";
 
 export default function TodoItem(props: { todo: Todo }) {
     const { todo } = props;
 
     const themeCtx = useContext(ThemeContext);
     const todoCtx = useContext(TodoContext);
+    const todoCompletedFilterCtx = useContext(TodoSearchCompletedContext);
 
     const [isEditing, setIsEditing] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,6 +39,14 @@ export default function TodoItem(props: { todo: Todo }) {
             return;
         }
 
+        const confirm = window.confirm(
+            "Are you sure you want to edit the todo?"
+        );
+
+        if (!confirm) {
+            return;
+        }
+
         setIsEditing(false);
         setIsSubmitting(true);
 
@@ -47,6 +57,20 @@ export default function TodoItem(props: { todo: Todo }) {
             completedRef.current.checked
         )
             .then((todo) => {
+                // When there is a completed status filter applied and
+                // the complete status does not match, remove the todo.
+                if (
+                    todoCompletedFilterCtx.completed !== null &&
+                    todo.completed !==
+                        todoCtx.todos.find((t) => t.id === todo.id)?.completed
+                ) {
+                    todoCtx.setTodos(
+                        todoCtx.todos.filter((t) => t.id !== todo.id)
+                    );
+
+                    return;
+                }
+
                 todoCtx.setTodos(
                     todoCtx.todos.map((t) => (t.id === todo.id ? todo : t))
                 );

@@ -34,10 +34,11 @@ export class TodoService implements TodoApi {
     }
 
     getTodos(
-        title?: string,
-        page?: number,
+        title: string,
+        page: number,
+        completed: boolean | null,
         signal?: AbortSignal
     ): Promise<Todo[]> {
-        return this.api.getTodos(title, page, signal);
+        return this.api.getTodos(title, page, completed, signal);
     }
 }

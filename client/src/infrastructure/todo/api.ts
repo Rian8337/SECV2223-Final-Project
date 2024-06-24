@@ -88,7 +88,7 @@ export default {
         return response.json() as Promise<Todo>;
     },
 
-    async getTodos(title, page, signal) {
+    async getTodos(title, page, completed, signal) {
         const url = new URL("gettodos.php", baseUrl);
 
         if (title) {
@@ -97,6 +97,10 @@ export default {
 
         if (page) {
             url.searchParams.set("page", page.toString());
+        }
+
+        if (completed !== null) {
+            url.searchParams.set("completed", Number(completed).toString());
         }
 
         const response = await fetch(url, {

@@ -3,6 +3,9 @@ import { TodoContextProvider } from "./TodoContext";
 import { ThemeContextProvider } from "./ThemeContext";
 import { UserContextProvider } from "./UserContext";
 import { FamilyContextProvider } from "./FamilyContext";
+import { TodoSearchPageContextProvider } from "./TodoSearchPageContext";
+import { TodoSearchTitleContextProvider } from "./TodoSearchTitleContext";
+import { TodoSearchCompletedContextProvider } from "./TodoSearchCompletedContext";
 
 const compose =
     (...components: FC<Record<string, unknown>>[]) =>
@@ -16,5 +19,8 @@ export const Providers = compose(
     FamilyContextProvider,
     TodoContextProvider,
     ThemeContextProvider,
-    UserContextProvider
+    UserContextProvider,
+    TodoSearchTitleContextProvider,
+    TodoSearchPageContextProvider,
+    TodoSearchCompletedContextProvider
 );

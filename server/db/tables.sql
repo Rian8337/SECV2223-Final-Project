@@ -48,5 +48,6 @@ CREATE TABLE IF NOT EXISTS `todo` (
     FOREIGN KEY (`family_id`) REFERENCES `family`(`id`) ON DELETE CASCADE,
     INDEX `title_idx` (`title` ASC),
     INDEX `family_id_idx` (`family_id` ASC),
-    INDEX `created_at_idx` (`created_at` DESC)
+    INDEX `created_at_idx` (`created_at` DESC),
+    INDEX `completed_family_id_idx` (`completed` ASC, `family_id` ASC)
 ) ENGINE = InnoDB;
