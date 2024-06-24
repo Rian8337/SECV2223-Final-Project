@@ -39,7 +39,7 @@ export default function AddFamilyMember() {
 
     return (
         <>
-            <h2>Add Family Member</h2>
+            <h2 className="text-3xl font-semibold">Add Family Member</h2>
 
             <form className="vertical-form" onSubmit={addMember}>
                 <input

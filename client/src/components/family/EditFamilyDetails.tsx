@@ -43,7 +43,7 @@ export default function EditFamilyDetails() {
 
     return (
         <>
-            <h2>Edit Family Details</h2>
+            <h2 className="text-3xl font-semibold">Edit Family Details</h2>
 
             <form className="vertical-form" onSubmit={editFamilyDetails}>
                 <input

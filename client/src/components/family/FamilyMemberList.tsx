@@ -21,7 +21,7 @@ export default function FamilyMemberList() {
 
     return (
         <>
-            <h2>Family Members</h2>
+            <h2 className="text-3xl font-semibold">Family Members</h2>
 
             {error ? <p className="family-members-error">{error}</p> : null}
 
