@@ -15,7 +15,7 @@ export default function TodoList() {
         <>
             <h2>Todo List</h2>
 
-            <table className={themeCtx.theme}>
+            <table className={themeCtx.theme} style={{ marginBottom: "1em" }}>
                 <thead>
                     <tr>
                         <th>Todo</th>
