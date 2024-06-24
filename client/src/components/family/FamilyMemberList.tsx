@@ -5,6 +5,8 @@ import FamilyMemberTable from "./FamilyMemberTable";
 import { FamilyMemberRole } from "../../constants/FamilyMemberRole";
 import "./FamilyMemberList.css";
 import SectionHeader from "../SectionHeader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 export default function FamilyMemberList() {
     const userCtx = useContext(UserContext);
@@ -24,7 +26,13 @@ export default function FamilyMemberList() {
         <>
             <SectionHeader>Family Members</SectionHeader>
 
-            {error ? <p className="family-members-error">{error}</p> : null}
+            {error ? (
+                <p className="family-members-error">
+                    <span>
+                        <FontAwesomeIcon icon={faXmark} /> {error}
+                    </span>
+                </p>
+            ) : null}
 
             <FamilyMemberTable
                 isUserAdmin={isAdmin}
