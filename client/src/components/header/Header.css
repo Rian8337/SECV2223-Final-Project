@@ -26,13 +26,13 @@
     letter-spacing: 0.2rem;
     margin-top: 50px;
     margin-bottom: 20px;
-    max-width: 480px;
+    max-width: 300px;
 }
 
 /* Animation */
 #title {
-    animation: animated-text 2s steps(11, end) 0.5s 1 normal both,
-        animated-cursor 750ms steps(11, end) infinite;
+    animation: animated-text 2s steps(2, end) 0.5s 1 normal both,
+        animated-cursor 750ms steps(2, end) infinite;
 }
 
 #title.darker-title {
@@ -102,6 +102,6 @@
     #title {
         animation: animated-text 3.5s steps(16, end) 0.5s 1 normal both,
             animated-cursor 750ms steps(16, end) infinite;
-        max-width: 255px;
+        max-width: 160px;
     }
 }

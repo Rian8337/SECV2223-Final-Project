@@ -56,7 +56,7 @@ export default function AddTodo() {
 
     return (
         <>
-            <h2>Add Todo</h2>
+            <h2 className="text-3xl font-semibold">Add Todo</h2>
 
             <form className="vertical-form" onSubmit={addTodo}>
                 <input
