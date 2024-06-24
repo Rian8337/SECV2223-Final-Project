@@ -81,8 +81,6 @@ export default {
             signal: signal,
         });
 
-        // console.log(await response.text());
-
         if (!response.ok) {
             throw new Error(await response.text());
         }

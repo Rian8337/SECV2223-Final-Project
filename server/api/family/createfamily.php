@@ -2,22 +2,22 @@
 
 require_once("../../core/Env.php");
 require_once('../../db/Db.php');
-require_once("../../core/POSTOnly.php");
+require_once("../../core/PUTOnly.php");
 require_once("../../core/CheckCookie.php");
 
-if (!isset($_POST["name"])) {
+if (!isset($_PUT["name"])) {
     echo "Please enter a family name.";
     http_response_code(400);
     exit();
 }
 
-if (strlen($_POST["name"]) < 3) {
+if (strlen($_PUT["name"]) < 3) {
     echo "Family name must be at least 3 characters long.";
     http_response_code(400);
     exit();
 }
 
-if (strlen($_POST["name"]) > 255) {
+if (strlen($_PUT["name"]) > 255) {
     echo "Family name must be at most 255 characters long.";
     http_response_code(400);
     exit();
@@ -52,7 +52,7 @@ $familyInsertResult = $db->query(
     sprintf(
         "INSERT INTO %s (name) VALUES ('%s')",
         Db::family_table,
-        $db->escapeString($_POST["name"])
+        $db->escapeString($_PUT["name"])
     )
 );
 

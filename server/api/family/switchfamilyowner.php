@@ -2,26 +2,26 @@
 
 require_once("../../core/Env.php");
 require_once('../../db/Db.php');
-require_once("../../core/POSTOnly.php");
+require_once("../../core/PATCHOnly.php");
 require_once("../../core/CheckCookie.php");
 
-if (!isset($_POST["id"])) {
+if (!isset($_PATCH["id"])) {
     echo "Please enter a user ID.";
     http_response_code(400);
     exit();
 }
 
 // Ensure the supplied ID can be converted to an integer
-if (!is_numeric($_POST["id"])) {
+if (!is_numeric($_PATCH["id"])) {
     echo "Invalid user ID.";
     http_response_code(400);
     exit();
 }
 
 // Convert ID to integer
-$_POST["id"] = intval($_POST["id"]);
+$_PATCH["id"] = intval($_PATCH["id"]);
 
-if ($_POST["id"] < 1) {
+if ($_PATCH["id"] < 1) {
     echo "Invalid user ID.";
     http_response_code(400);
     exit();
@@ -77,7 +77,7 @@ $userToPromote = $db->query(
     sprintf(
         "SELECT id, family_id FROM %s WHERE id = %d",
         Db::user_table,
-        $_POST["id"]
+        $_PATCH["id"]
     )
 )->fetch_assoc();
 

@@ -12,7 +12,7 @@ export default {
         searchParams.set("name", name);
 
         const response = await fetch(url, {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },
@@ -88,7 +88,7 @@ export default {
         searchParams.set("email", email);
 
         const response = await fetch(url, {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded",
             },

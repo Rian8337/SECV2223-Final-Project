@@ -2,16 +2,16 @@
 
 require_once("../../core/Env.php");
 require_once('../../db/Db.php');
-require_once("../../core/POSTOnly.php");
+require_once("../../core/PUTOnly.php");
 require_once("../../core/CheckCookie.php");
 
-if (!isset($_POST["email"])) {
+if (!isset($_PUT["email"])) {
     echo "Please enter an email.";
     http_response_code(400);
     exit();
 }
 
-if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+if (!filter_var($_PUT["email"], FILTER_VALIDATE_EMAIL)) {
     echo "Invalid email.";
     http_response_code(400);
     exit();
@@ -66,7 +66,7 @@ $userToAdd = $db->query(
     sprintf(
         "SELECT id, family_id FROM %s WHERE email = '%s'",
         Db::user_table,
-        $_POST["email"]
+        $_PUT["email"]
     )
 )->fetch_assoc();
 
