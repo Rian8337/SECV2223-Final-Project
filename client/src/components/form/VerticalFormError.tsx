@@ -15,9 +15,7 @@ export default function VerticalFormError(props: { error: string | null }) {
             animate={{ opacity: 1, height: "auto" }}
             transition={{ duration: 0.25 }}
         >
-            <span>
-                <FontAwesomeIcon icon={faXmark} /> {props.error}
-            </span>
+            <FontAwesomeIcon icon={faXmark} /> {props.error}
         </motion.p>
     );
 }
