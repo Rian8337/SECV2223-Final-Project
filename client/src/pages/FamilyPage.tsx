@@ -31,6 +31,11 @@ export default function FamilyPage() {
             return;
         }
 
+        // Do not refetch if it is the same family.
+        if (familyCtx.value?.id === userCtx.value.family_id) {
+            return;
+        }
+
         FamilyService.getFamily()
             .then((family) => {
                 familyCtx.setValue(family);

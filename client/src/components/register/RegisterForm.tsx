@@ -104,7 +104,7 @@ export default function RegisterForm() {
                 <button
                     className={`${themeCtx.theme}-button`}
                     type="submit"
-                    disabled={isRegistering}
+                    disabled={isRegistering || error !== null}
                 >
                     {isRegistering ? "Registering..." : "Register"}
                 </button>

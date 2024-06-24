@@ -1,0 +1,13 @@
+.profile-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    width: 100%;
+}
+
+/* Responsive design */
+
+@media only screen and (max-width: 900px) {
+    .profile-grid {
+        grid-template-columns: 100%;
+    }
+}

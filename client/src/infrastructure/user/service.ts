@@ -26,6 +26,23 @@ export class UserService implements UserApi {
         return this.api.loginWithCookie(signal);
     }
 
+    logout(signal?: AbortSignal): Promise<void> {
+        return this.api.logout(signal);
+    }
+
+    editUser(email: string, name: string, signal?: AbortSignal): Promise<User> {
+        return this.api.editUser(email, name, signal);
+    }
+
+    async changePassword(
+        password: string,
+        signal?: AbortSignal
+    ): Promise<void> {
+        const encodedPassword = await encodePassword(password);
+
+        return this.api.changePassword(encodedPassword, signal);
+    }
+
     async register(
         name: string,
         email: string,

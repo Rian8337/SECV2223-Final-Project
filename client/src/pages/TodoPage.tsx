@@ -8,11 +8,13 @@ import { ThemeContext } from "../hooks/ThemeContext";
 import "./TodoPage.css";
 import { UserContext } from "../hooks/UserContext";
 import { useNavigate } from "react-router-dom";
+import { FamilyContext } from "../hooks/FamilyContext";
 
 export default function TodoPage() {
     const navigate = useNavigate();
 
     const userCtx = useContext(UserContext);
+    const familyCtx = useContext(FamilyContext);
     const themeCtx = useContext(ThemeContext);
     const todoCtx = useContext(TodoContext);
     const [error, setError] = useState<string | null>(null);
@@ -21,6 +23,15 @@ export default function TodoPage() {
         if (userCtx.value === null) {
             navigate("/login");
 
+            return;
+        }
+
+        if (!userCtx.value?.family_id) {
+            return;
+        }
+
+        // Do not refresh if it is the same family.
+        if (familyCtx.value?.id === userCtx.value.family_id) {
             return;
         }
 

@@ -13,7 +13,7 @@ export default function TopMenu() {
                 <>
                     <a href="#todo">Todo</a>
                     <a href="#family">Family</a>
-                    <a href="#logout">Logout</a>
+                    <a href="#profile">Profile</a>
                 </>
             ) : (
                 <>

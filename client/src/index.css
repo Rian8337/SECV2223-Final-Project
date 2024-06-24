@@ -162,6 +162,16 @@ a {
     flex-direction: column;
 }
 
+.vertical-form .input-container {
+    display: flex;
+    align-items: center;
+}
+
+.vertical-form .input-container label {
+    font-size: 0.75em;
+    margin-right: 0.75em;
+}
+
 .vertical-form input {
     padding: 0.75rem;
     font-size: 0.65em;
@@ -173,7 +183,7 @@ a {
     width: 100%;
 }
 
-.vertical-form *:nth-child(n + 2) {
+.vertical-form > *:nth-child(n + 2) {
     margin-top: 1em;
 }
 

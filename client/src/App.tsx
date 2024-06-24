@@ -10,6 +10,7 @@ import { useContext, useEffect } from "react";
 import TodoPage from "./pages/TodoPage";
 import UserService from "./infrastructure/user";
 import { ThemeContext } from "./hooks/ThemeContext";
+import ProfilePage from "./pages/ProfilePage";
 
 export default function App() {
     const themeCtx = useContext(ThemeContext);
@@ -65,6 +66,7 @@ export default function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/todo" element={<TodoPage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
 
                     <Route path="*" element={<HomePage />} />
                 </Routes>
