@@ -33,10 +33,18 @@ export default function FamilyMemberTableActionRow(
         setIsSubmitting,
     } = props;
 
-    function removeMember(memberId: number) {
+    function removeMember(member: FamilyMember) {
+        const confirm = window.confirm(
+            `Are you sure you want to remove ${member.name} (${member.email}) from the family?`
+        );
+
+        if (!confirm) {
+            return;
+        }
+
         setIsSubmitting(true);
 
-        FamilyService.removeMember(memberId)
+        FamilyService.removeMember(member.id)
             .then((family) => {
                 familyCtx.setValue(family);
             })
@@ -54,10 +62,18 @@ export default function FamilyMemberTableActionRow(
             });
     }
 
-    function moveOwnership(memberId: number) {
+    function moveOwnership(member: FamilyMember) {
+        const confirm = window.confirm(
+            `Are you sure you want to move ownership to ${member.name} (${member.email})?`
+        );
+
+        if (!confirm) {
+            return;
+        }
+
         setIsSubmitting(true);
 
-        FamilyService.moveOwnership(memberId)
+        FamilyService.moveOwnership(member.id)
             .then((family) => {
                 familyCtx.setValue(family);
             })
@@ -131,7 +147,7 @@ export default function FamilyMemberTableActionRow(
                 className={`${themeCtx.theme}-button action-button`}
                 disabled={isSubmitting}
                 onClick={() => {
-                    removeMember(member.id);
+                    removeMember(member);
                 }}
             >
                 {member.id === userCtx.value.id ? "Leave" : "Remove"}
@@ -147,7 +163,7 @@ export default function FamilyMemberTableActionRow(
                 className={`${themeCtx.theme}-button action-button`}
                 disabled={isSubmitting}
                 onClick={() => {
-                    moveOwnership(member.id);
+                    moveOwnership(member);
                 }}
             >
                 Move Ownership
