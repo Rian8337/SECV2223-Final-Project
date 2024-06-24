@@ -29,6 +29,14 @@ export default function TodoItem(props: { todo: Todo }) {
             return;
         }
 
+        if (
+            titleRef.current.value === todo.title &&
+            descriptionRef.current.value === todo.description &&
+            completedRef.current.checked === todo.completed
+        ) {
+            return;
+        }
+
         setIsEditing(false);
         setIsSubmitting(true);
 
