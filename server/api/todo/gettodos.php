@@ -36,8 +36,8 @@ $query = sprintf(
 );
 
 // If searched title is set, filter by title.
-if (isset($_GET["searchedTitle"])) {
-    $query .= sprintf(" AND title LIKE '%s%'", $db->escapeString($_GET["searchedTitle"]));
+if (isset($_GET["title"])) {
+    $query .= sprintf(" AND title LIKE '%s%'", $db->escapeString($_GET["title"]));
 }
 
 $page = isset($_GET["page"]) ? intval($_GET["page"]) : 0;
