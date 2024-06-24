@@ -89,6 +89,7 @@ export default function EditUserDetails() {
                         defaultValue={userCtx.value.email}
                         disabled={!isEditing || isSubmitting}
                         ref={emailInputRef}
+                        size={50}
                     />
                 </VerticalFormInputContainer>
 
@@ -104,6 +105,7 @@ export default function EditUserDetails() {
                         defaultValue={userCtx.value.name}
                         disabled={!isEditing || isSubmitting}
                         ref={nameInputRef}
+                        size={50}
                     />
                 </VerticalFormInputContainer>
 
