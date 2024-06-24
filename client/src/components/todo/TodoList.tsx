@@ -14,7 +14,7 @@ export default function TodoList() {
 
     return (
         <>
-            <SectionHeader>Add Todo</SectionHeader>
+            <SectionHeader>Todo List</SectionHeader>
 
             <table className={themeCtx.theme} style={{ marginBottom: "1em" }}>
                 <thead>
