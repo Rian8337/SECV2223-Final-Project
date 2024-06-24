@@ -4,6 +4,7 @@ import { ThemeContext } from "../../hooks/ThemeContext";
 import TodoService from "../../infrastructure/todo";
 import VerticalForm from "../form/VerticalForm";
 import VerticalFormError from "../form/VerticalFormError";
+import SectionHeader from "../SectionHeader";
 
 export default function AddTodo() {
     const todoCtx = useContext(TodoContext);
@@ -58,7 +59,7 @@ export default function AddTodo() {
 
     return (
         <>
-            <h2>Add Todo</h2>
+            <SectionHeader>Add Todo</SectionHeader>
 
             <VerticalForm onSubmit={addTodo}>
                 <input

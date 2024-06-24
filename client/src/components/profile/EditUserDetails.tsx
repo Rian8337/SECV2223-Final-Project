@@ -6,6 +6,7 @@ import VerticalForm from "../form/VerticalForm";
 import VerticalFormInputContainer from "../form/VerticalFormInputContainer";
 import VerticalFormError from "../form/VerticalFormError";
 import VerticalFormSection from "../form/VerticalFormSection";
+import SectionHeader from "../SectionHeader";
 
 export default function EditUserDetails() {
     const themeCtx = useContext(ThemeContext);
@@ -74,7 +75,7 @@ export default function EditUserDetails() {
 
     return (
         <div>
-            <h2 style={{ textAlign: "center" }}>Edit Details</h2>
+            <SectionHeader>Edit Details</SectionHeader>
 
             <VerticalForm onSubmit={editUser}>
                 <VerticalFormInputContainer>

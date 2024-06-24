@@ -4,6 +4,7 @@ import { UserContext } from "../../hooks/UserContext";
 import FamilyMemberTable from "./FamilyMemberTable";
 import { FamilyMemberRole } from "../../constants/FamilyMemberRole";
 import "./FamilyMemberList.css";
+import SectionHeader from "../SectionHeader";
 
 export default function FamilyMemberList() {
     const userCtx = useContext(UserContext);
@@ -21,7 +22,7 @@ export default function FamilyMemberList() {
 
     return (
         <>
-            <h2>Family Members</h2>
+            <SectionHeader>Family Members</SectionHeader>
 
             {error ? <p className="family-members-error">{error}</p> : null}
 

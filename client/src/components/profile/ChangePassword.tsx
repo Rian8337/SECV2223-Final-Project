@@ -4,6 +4,7 @@ import UserService from "../../infrastructure/user";
 import VerticalForm from "../form/VerticalForm";
 import VerticalFormInputContainer from "../form/VerticalFormInputContainer";
 import VerticalFormError from "../form/VerticalFormError";
+import SectionHeader from "../SectionHeader";
 
 export default function ChangePassword() {
     const themeCtx = useContext(ThemeContext);
@@ -52,7 +53,7 @@ export default function ChangePassword() {
 
     return (
         <div>
-            <h2 style={{ textAlign: "center" }}>Change Password</h2>
+            <SectionHeader>Change Password</SectionHeader>
 
             <VerticalForm onSubmit={changePassword}>
                 <VerticalFormInputContainer>

@@ -4,6 +4,7 @@ import { FamilyContext } from "../../hooks/FamilyContext";
 import FamilyService from "../../infrastructure/family";
 import VerticalForm from "../form/VerticalForm";
 import VerticalFormError from "../form/VerticalFormError";
+import SectionHeader from "../SectionHeader";
 
 export default function EditFamilyDetails() {
     const themeCtx = useContext(ThemeContext);
@@ -45,7 +46,7 @@ export default function EditFamilyDetails() {
 
     return (
         <>
-            <h2>Edit Family Details</h2>
+            <SectionHeader>Edit Family Details</SectionHeader>
 
             <VerticalForm onSubmit={editFamilyDetails}>
                 <input

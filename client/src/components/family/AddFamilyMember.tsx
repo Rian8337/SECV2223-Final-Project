@@ -4,6 +4,7 @@ import { FamilyContext } from "../../hooks/FamilyContext";
 import FamilyService from "../../infrastructure/family";
 import VerticalForm from "../form/VerticalForm";
 import VerticalFormError from "../form/VerticalFormError";
+import SectionHeader from "../SectionHeader";
 
 export default function AddFamilyMember() {
     const themeCtx = useContext(ThemeContext);
@@ -41,7 +42,7 @@ export default function AddFamilyMember() {
 
     return (
         <>
-            <h2>Add Family Member</h2>
+            <SectionHeader>Add Family Member</SectionHeader>
 
             <VerticalForm onSubmit={addMember}>
                 <input
