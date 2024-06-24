@@ -97,7 +97,7 @@ if (!$updateResult) {
 // Obtain the updated todo structure
 $todo = $db->query(
     sprintf(
-        "SELECT id, title, description, created_at, user_id FROM %s WHERE id = %d",
+        "SELECT id, title, description, created_at, completed, user_id FROM %s WHERE id = %d",
         Db::todo_table,
         $todo["id"]
     )

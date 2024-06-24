@@ -30,7 +30,7 @@ if (!isset($user["family_id"])) {
 }
 
 $query = sprintf(
-    "SELECT id, title, description, created_at, user_id FROM %s WHERE family_id = %d",
+    "SELECT id, title, description, created_at, completed, user_id FROM %s WHERE family_id = %d",
     Db::todo_table,
     $user["family_id"]
 );

@@ -61,7 +61,7 @@ if (!$insertResult) {
 // Obtain the newly added todo structure, with creation date converted to ISO-8601 string format
 $todo = $db->query(
     sprintf(
-        "SELECT id, title, description, created_at, user_id FROM %s WHERE id = %d",
+        "SELECT id, title, description, created_at, completed, user_id FROM %s WHERE id = %d",
         Db::todo_table,
         $db->getDbConnection()->insert_id
     )
