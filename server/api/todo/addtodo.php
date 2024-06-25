@@ -14,7 +14,7 @@ if (!isset($_POST["title"])) {
 $db = new Db();
 $user = $db->query(
     sprintf(
-        "SELECT id, family_id FROM %s WHERE session_id = '%s'",
+        "SELECT id, family_id, name FROM %s WHERE session_id = '%s'",
         Db::user_table,
         $db->escapeString($_COOKIE['sessionId'])
     )
@@ -61,7 +61,7 @@ if (!$insertResult) {
 // Obtain the newly added todo structure, with creation date converted to ISO-8601 string format
 $todo = $db->query(
     sprintf(
-        "SELECT id, title, description, created_at, completed, user_id FROM %s WHERE id = %d",
+        "SELECT id, title, description, created_at, completed FROM %s WHERE id = %d",
         Db::todo_table,
         $db->getDbConnection()->insert_id
     )
@@ -74,26 +74,10 @@ if (!$todo) {
 }
 
 // Replace user ID with the user who created the todo
-$todoCreator = $db->query(
-    sprintf(
-        "SELECT name FROM %s WHERE id = %d",
-        Db::user_table,
-        $todo["user_id"]
-    )
-)->fetch_assoc();
-
-if (!$todoCreator) {
-    echo "Failed to find user.";
-    http_response_code(500);
-    exit();
-}
-
 $todo["user"] = array(
-    "id" => $todo["user_id"],
-    "name" => $todoCreator["name"]
+    "id" => $user["id"],
+    "name" => $user["name"]
 );
-
-unset($todo["user_id"]);
 
 http_response_code(201);
 echo json_encode($todo, JSON_NUMERIC_CHECK);
