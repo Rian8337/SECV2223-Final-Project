@@ -7,7 +7,7 @@ require_once("../../core/POSTOnly.php");
 $db = new Db();
 $user = null;
 
-if (isset($_COOKIE["sessionId"])) {
+if (isset($_COOKIE["sessionId"]) && !isset($_POST["email"], $_POST["password"])) {
     require_once("../../core/CheckCookie.php");
 
     $user = $db->query(
